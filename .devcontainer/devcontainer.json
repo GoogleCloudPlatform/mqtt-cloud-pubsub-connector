@@ -5,10 +5,6 @@
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      // Update the VARIANT arg to pick a Java version: 11, 17
-      // Append -bullseye or -buster to pin to an OS version.
-      // Use the -bullseye variants on local arm64/Apple Silicon.
-      "VARIANT": "17-bullseye",
       // Options
       "INSTALL_MAVEN": "false",
       "INSTALL_GRADLE": "true",
@@ -23,6 +19,7 @@
       "settings": {},
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
+        "HashiCorp.terraform",
         "redhat.apache-camel-extension-pack",
         "redhat.vscode-quarkus",
         "vscjava.vscode-gradle",

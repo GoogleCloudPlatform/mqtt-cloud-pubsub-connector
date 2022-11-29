@@ -12,52 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Gradle
-.gradle/
-build/
+data "google_project" "default_project" {
+  project_id = var.google_default_project_id
+}
 
-# Eclipse
-.project
-.classpath
-.settings/
-bin/
+data "google_client_config" "default" {}
 
-# IntelliJ
-.idea
-*.ipr
-*.iml
-*.iws
+provider "google" {
+  project = var.google_default_project_id
+  region  = var.google_default_region
+  zone    = var.google_default_zone
+}
 
-# NetBeans
-nb-configuration.xml
-
-# Visual Studio Code
-.vscode
-.factorypath
-
-# OSX
-.DS_Store
-
-# Vim
-*.swp
-*.swo
-
-# patch
-*.orig
-*.rej
-
-# Local environment
-.env
-
-# Ignore the Terraform state directory
-*/**/.terraform
-
-# Ignore local Terraform state
-*.tfstate*
-
-# Don't store the Google Cloud Storage Terraform backend configuration
-# because it's automatically generated
-gcs-backend.conf
-
-# Ignore the user-provided variables file
-**/terraform.tfvars
+# provider "kubernetes" {
+#   host                   = "https://${module.gke.endpoint}"
+#   token                  = data.google_client_config.default.access_token
+#   cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+# }

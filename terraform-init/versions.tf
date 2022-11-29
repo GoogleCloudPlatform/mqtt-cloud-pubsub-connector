@@ -12,52 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Gradle
-.gradle/
-build/
+terraform {
+  required_version = ">=1.3.6"
 
-# Eclipse
-.project
-.classpath
-.settings/
-bin/
-
-# IntelliJ
-.idea
-*.ipr
-*.iml
-*.iws
-
-# NetBeans
-nb-configuration.xml
-
-# Visual Studio Code
-.vscode
-.factorypath
-
-# OSX
-.DS_Store
-
-# Vim
-*.swp
-*.swo
-
-# patch
-*.orig
-*.rej
-
-# Local environment
-.env
-
-# Ignore the Terraform state directory
-*/**/.terraform
-
-# Ignore local Terraform state
-*.tfstate*
-
-# Don't store the Google Cloud Storage Terraform backend configuration
-# because it's automatically generated
-gcs-backend.conf
-
-# Ignore the user-provided variables file
-**/terraform.tfvars
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 4.44.1, <5.0.0"
+    }
+  }
+}

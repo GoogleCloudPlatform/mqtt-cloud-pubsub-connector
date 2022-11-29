@@ -28,6 +28,7 @@ echo "This script directory path is: ${SCRIPT_DIRECTORY_PATH}"
 . "${SCRIPT_DIRECTORY_PATH}/common.sh"
 
 FIX_LINTING_ERRORS_DESCRIPTION="Automatically fix linting errors."
+PUSH_CONTAINER_IMAGE_REGISTRY_DESCRIPTION="Push the container image to the provided registry."
 
 usage() {
   echo
@@ -39,6 +40,7 @@ usage() {
   echo "OPTIONS"
   echo "  -f $(is_linux && echo "| --fix-linting-errors"): ${FIX_LINTING_ERRORS_DESCRIPTION}"
   echo "  -h $(is_linux && echo "| --help"): ${HELP_DESCRIPTION}"
+  echo "  -p $(is_linux && echo "| --push-container-image"): ${PUSH_CONTAINER_IMAGE_REGISTRY_DESCRIPTION}"
   echo
   echo "EXIT STATUS"
   echo
@@ -49,8 +51,8 @@ usage() {
   echo "  ${ERR_ARGUMENT_EVAL_ERROR} when there was an error while evaluating the program options."
 }
 
-LONG_OPTIONS="help,fix-linting-errors"
-SHORT_OPTIONS="hf"
+LONG_OPTIONS="fix-linting-errors,help,push-container-image:"
+SHORT_OPTIONS="fhp:"
 
 # BSD getopt (bundled in MacOS) doesn't support long options, and has different parameters than GNU getopt
 if is_linux; then
@@ -73,15 +75,21 @@ CONTAINER_IMAGE_TAG="latest"
 DEVCONTAINER_IMAGE_TAG="latest"
 DEVCONTAINER_CLI_IMAGE_TAG="latest"
 FIX_LINTING_ERRORS="false"
+PUSH_CONTAINER_IMAGE_REGISTRY=
 
 while true; do
   case "${1}" in
-  --)
+  -f | --fix-linting-errors)
+    FIX_LINTING_ERRORS="true"
     shift
     break
     ;;
-  -f | fix-linting-errors | *)
-    FIX_LINTING_ERRORS="true"
+  -p | --push-container-image)
+    PUSH_CONTAINER_IMAGE_REGISTRY="${2}"
+    shift 2
+    break
+    ;;
+  --)
     shift
     break
     ;;
@@ -144,3 +152,15 @@ echo "Building the project container image: ${CONTAINER_IMAGE_FULL_ID}"
 docker build \
   --tag "${CONTAINER_IMAGE_FULL_ID}" \
   .
+
+if [ -n "${PUSH_CONTAINER_IMAGE_REGISTRY}" ]; then
+  CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY="${PUSH_CONTAINER_IMAGE_REGISTRY}/${CONTAINER_IMAGE_FULL_ID}"
+
+  echo "Tagging ${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
+  docker image tag "${CONTAINER_IMAGE_FULL_ID}" "${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
+
+  echo "Pushing ${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
+  docker image push \
+    --all-tags \
+    "${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
+fi

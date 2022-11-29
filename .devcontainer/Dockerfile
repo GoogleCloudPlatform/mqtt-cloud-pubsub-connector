@@ -1,5 +1,6 @@
-ARG VARIANT="17-bullseye"
-FROM mcr.microsoft.com/vscode/devcontainers/java:0-${VARIANT}
+FROM hashicorp/terraform:1.3.6 as terraform
+
+FROM mcr.microsoft.com/vscode/devcontainers/java:17-bullseye
 
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
@@ -10,3 +11,5 @@ RUN if [ "${INSTALL_MAVEN}" = "true" ]; then su vscode -c "umask 0002 && . /usr/
 
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
+
+COPY --from=terraform /bin/terraform /usr/bin/

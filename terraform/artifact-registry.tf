@@ -12,52 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Gradle
-.gradle/
-build/
+resource "google_artifact_registry_repository" "mqtt_cloud_pubsub_container_image_repository" {
+  location      = var.google_artifact_registry_location
+  repository_id = "mqtt_cloud_pubsub_container_image_repository"
+  description   = "MQTT <-> Cloud Pub/Sub container image repository"
+  format        = "DOCKER"
 
-# Eclipse
-.project
-.classpath
-.settings/
-bin/
-
-# IntelliJ
-.idea
-*.ipr
-*.iml
-*.iws
-
-# NetBeans
-nb-configuration.xml
-
-# Visual Studio Code
-.vscode
-.factorypath
-
-# OSX
-.DS_Store
-
-# Vim
-*.swp
-*.swo
-
-# patch
-*.orig
-*.rej
-
-# Local environment
-.env
-
-# Ignore the Terraform state directory
-*/**/.terraform
-
-# Ignore local Terraform state
-*.tfstate*
-
-# Don't store the Google Cloud Storage Terraform backend configuration
-# because it's automatically generated
-gcs-backend.conf
-
-# Ignore the user-provided variables file
-**/terraform.tfvars
+  depends_on = [
+    module.project-services
+  ]
+}

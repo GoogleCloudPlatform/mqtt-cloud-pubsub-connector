@@ -4,6 +4,41 @@ The **MQTT <-> Cloud Pub/Sub connector** is a set of software components aimed
 at interfacing [MQTT](https://mqtt.org/) brokers and clients with
 [Cloud Pub/Sub](https://cloud.google.com/pubsub).
 
+## Provision a test and validation runtime environment on Google Cloud
+
+To provision and configure an environment to perform testing and validation experiments
+on Google Cloud, we provide the necessary infrastructure-as-code descriptors:
+
+- [terraform](terraform): This directory contains all the necessary [Terraform](https://www.terraform.io/)
+    descriptors to provision the runtime environment in an existing
+    [Google Cloud project](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#projects).
+- [terraform-init](terraform-init): This directory contains all the necessary Terraform descriptors
+    to provision a Google Cloud project and a Google Cloud Storage bucket to use as a
+    remote [Terraform backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+
+To provision a test and validation runtime environment on Google Cloud, you need:
+
+- A POSIX-compliant shell
+- An OCI-compatible container runtime. Tested with Docker for Linux 20.10.21
+
+To provision the resources for the testing and validation runtime environment, do the following:
+
+1. Change your working directory to the root directory of this repository.
+1. Set the values of the configuration variables for your environment by editing the `terraform/terraform.tfvars`.
+1. Run the project creation script:
+
+```sh
+scripts/provision-cloud-infrastructure.sh
+```
+
+### Clean up
+
+If you want to delete all the resources in the environment, run the following command:
+
+```sh
+scripts/destroy-cloud-infrastructure.sh
+```
+
 ## Development environment
 
 To setup a development environment, we designed a [Visual Studio Code Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)
