@@ -1,0 +1,88 @@
+/*
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+plugins {
+  id 'java'
+  id 'com.diffplug.spotless' version '6.12.0'
+  id 'io.quarkus'
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+dependencies {
+  implementation enforcedPlatform("${quarkusPlatformGroupId}:quarkus-camel-bom:${quarkusPlatformVersion}")
+  implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+  implementation 'io.quarkus:quarkus-arc'
+  implementation 'io.quarkus:quarkus-container-image-docker'
+  implementation 'org.apache.camel.quarkus:camel-quarkus-google-pubsub'
+  implementation 'org.apache.camel.quarkus:camel-quarkus-paho-mqtt5'
+  implementation 'org.jboss.slf4j:slf4j-jboss-logmanager'
+
+  testImplementation 'io.quarkus:quarkus-junit5'
+  testImplementation 'io.rest-assured:rest-assured'
+  testImplementation 'org.assertj:assertj-core:3.23.1'
+  testImplementation "org.testcontainers:junit-jupiter"
+  testImplementation "org.testcontainers:testcontainers"
+}
+
+group 'com.google.cloud.solutions'
+version '1.0.0-SNAPSHOT'
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.encoding = 'UTF-8'
+}
+
+test {
+  systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+}
+
+spotless {
+  java {
+    target "**/*.java"
+    googleJavaFormat("1.15.0")
+    formatAnnotations()
+    removeUnusedImports()
+    importOrder()
+    trimTrailingWhitespace()
+    endWithNewline()
+    licenseHeader "/*\n" +
+      " * Copyright \$YEAR Google LLC\n" +
+      " *\n" +
+      " * Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except\n" +
+      " * in compliance with the License. You may obtain a copy of the License at\n" +
+      " *\n" +
+      " * https://www.apache.org/licenses/LICENSE-2.0\n" +
+      " *\n" +
+      " * Unless required by applicable law or agreed to in writing, software distributed under the License\n" +
+      " * is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express\n" +
+      " * or implied. See the License for the specific language governing permissions and limitations under\n" +
+      " * the License.\n" +
+      " */\n" +
+      "\n"
+  }
+}
