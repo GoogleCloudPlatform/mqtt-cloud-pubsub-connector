@@ -1,0 +1,58 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emqtt-bench
+spec:
+  selector:
+    matchLabels:
+      app: emqtt-bench
+  template:
+    metadata:
+      labels:
+        app: emqtt-bench
+    spec:
+      containers:
+        # We set a more precise container image ID with Kustomize
+        - image: emqtt-bench
+          name: emqtt-bench
+          # Options reference: https://github.com/emqx/emqtt-bench
+          args:
+            - "pub"
+            - "--count" # max number of clients that connect to the MQTT broker
+            - "1"
+            - "--host" # MQTT broker host
+            - "mosquitto"
+            - "--interval" # Interval between connections to the broker
+            - "1" # in milliseconds
+            - "--interval_of_msg"
+            - "10" # in milliseconds
+            - "--qos"
+            - "2" # 0 = at most once, 1 = at least once, 2 = exactly once
+            - "--topic" # MQTT topic to publish to
+            - "source-mqtt-topic"
+          resources:
+            # Setting limits same as requests because GKE Autopilot only considers requests
+            # See https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-resource-requests#resource-limits
+            limits:
+              cpu: "1000m"
+              ephemeral-storage: "1Gi"
+              memory: "1Gi"
+            requests:
+              cpu: "1000m"
+              ephemeral-storage: "1Gi"
+              memory: "1Gi"

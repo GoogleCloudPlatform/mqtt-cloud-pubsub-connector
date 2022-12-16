@@ -16,6 +16,7 @@ locals {
   mqtt_cloud_pub_sub_connector_cluster_name = "gke-mqtt-cloud-pub-sub-1"
 }
 
+# https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/master/modules/beta-autopilot-private-cluster
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-private-cluster"
   version = "24.0.0"
@@ -44,6 +45,25 @@ module "gke" {
       display_name = "VPC"
     },
   ]
+
+  depends_on = [
+    module.project-services
+  ]
+}
+
+module "mqtt_cloud_pubsub_connector_workload_identity" {
+  source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  version = "24.0.0"
+
+  name       = "mqtt-cloud-pubsub-connector"
+  namespace  = "mqtt-cloud-pubsub-connector"
+  project_id = data.google_project.default_project.project_id
+
+  # We're going to manipulate Kubernetes service accounts outside Terraform from a trusted bastion host
+  annotate_k8s_sa     = false
+  use_existing_k8s_sa = true
+
+  roles = ["roles/pubsub.publisher"]
 
   depends_on = [
     module.project-services

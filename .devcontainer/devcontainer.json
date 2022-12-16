@@ -19,7 +19,10 @@
       "settings": {},
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
+        "DavidAnson.vscode-markdownlint",
         "HashiCorp.terraform",
+        "ms-azuretools.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
         "redhat.apache-camel-extension-pack",
         "redhat.vscode-quarkus",
         "vscjava.vscode-gradle",

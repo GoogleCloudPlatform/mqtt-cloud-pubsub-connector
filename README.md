@@ -24,11 +24,35 @@ To provision a test and validation runtime environment on Google Cloud, you need
 To provision the resources for the testing and validation runtime environment, do the following:
 
 1. Change your working directory to the root directory of this repository.
-1. Set the values of the configuration variables for your environment by editing the `terraform/terraform.tfvars`.
-1. Run the project creation script:
+1. Set the values of the configuration variables for your environment by editing the `terraform-init/terraform.tfvars`.
+    You need to provide the values for the variables defined in `terraform-init/variables.tf`. For more information about
+    each variable, refer to their descriptions in `terraform-init/variables.tf`.
+
+    For example:
+
+    ```hcl
+    billing_account_id                     = "ABCDEF-GHIJK-123456"
+    google_project_id                      = "project-id"
+    organization_id                        = "123456789"
+    terraform_state_production_bucket_name = "terraform-state"
+    ```
+
+1. Run the resource provisioning script:
 
 ```sh
 scripts/provision-cloud-infrastructure.sh
+```
+
+1. Run the build script:
+
+```sh
+scripts/build.sh
+```
+
+1. Run the workload deployment script:
+
+```sh
+scripts/deploy-workloads.sh
 ```
 
 ### Clean up

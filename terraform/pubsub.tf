@@ -12,11 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_artifact_registry_repository" "mqtt_cloud_pubsub_container_image_repository" {
-  location      = var.google_artifact_registry_location
-  repository_id = "mqtt-cloud-pubsub-container-image-repository"
-  description   = "MQTT <-> Cloud Pub/Sub container image repository"
-  format        = "DOCKER"
+module "pubsub" {
+  source  = "terraform-google-modules/pubsub/google"
+  version = "4.0.1"
+
+  topic      = var.cloud_pubsub_destination_topic_name
+  project_id = data.google_project.default_project.project_id
+  pull_subscriptions = [
+    {
+      enable_exactly_once_delivery = true
+      enable_message_ordering      = true
+      maximum_backoff              = "600s"
+      minimum_backoff              = "300s"
+      name                         = "mqtt-pull"
+    }
+  ]
 
   depends_on = [
     module.project-services

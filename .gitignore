@@ -61,3 +61,6 @@ gcs-backend.conf
 
 # Ignore the user-provided variables file
 **/terraform.tfvars
+
+# Ignore the MQTT broker benchmark suite
+emqtt-bench/

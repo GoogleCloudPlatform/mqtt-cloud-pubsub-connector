@@ -22,17 +22,17 @@ variable "folder_id" {
   # The project-factory modules expects an empty string if the project is not going to be in a folder.
   # See https://github.com/terraform-google-modules/terraform-google-project-factory/blob/master/modules/core_project_factory/main.tf
   default     = ""
-  description = "ID of the Google Cloud folder where to create the Google Cloud project in."
+  description = "ID of the Google Cloud folder where to create the Google Cloud project in. For more information about getting the Google Cloud folder ID, refer to https://cloud.google.com/resource-manager/docs/creating-managing-folders"
   type        = string
 }
 
 variable "google_project_id" {
-  description = "ID of the Google Cloud project to create."
+  description = "ID of the Google Cloud project to create. For more information about getting the Google Cloud project ID, refer to https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects"
   type        = string
 }
 
 variable "organization_id" {
-  description = "ID of the Google Cloud Organization where to create the Google Cloud project in."
+  description = "ID of the Google Cloud Organization where to create the Google Cloud project in. For more information about getting the Google Cloud Organization ID, refer to https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id"
   type        = string
 }
 

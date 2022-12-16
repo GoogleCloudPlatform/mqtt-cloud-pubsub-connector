@@ -57,7 +57,7 @@ public class MqttBrokerResource extends AbstractContainerResource {
         .withClasspathResourceMapping(
             "mosquitto/mosquitto.conf", "/mosquitto/config/mosquitto.conf", BindMode.READ_ONLY)
         .withClasspathResourceMapping(
-            "mosquitto/password.conf", "/etc/mosquitto/password", BindMode.READ_ONLY)
+            "mosquitto/password.conf", "/mosquitto/config/password.conf", BindMode.READ_ONLY)
         .withExposedPorts(mqttBrokerTcpPort)
         .waitingFor(Wait.forLogMessage(".* mosquitto version .* running.*", 1))
         .waitingFor(Wait.forListeningPort())

@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_artifact_registry_repository" "mqtt_cloud_pubsub_container_image_repository" {
-  location      = var.google_artifact_registry_location
-  repository_id = "mqtt-cloud-pubsub-container-image-repository"
-  description   = "MQTT <-> Cloud Pub/Sub container image repository"
-  format        = "DOCKER"
+set -o nounset
+set -o errexit
 
-  depends_on = [
-    module.project-services
-  ]
-}
+apt-get update
+
+echo "Installing kubectl"
+apt-get --yes install \
+  google-cloud-sdk-gke-gcloud-auth-plugin \
+  kubectl
+
+apt-get --yes upgrade
+
+kubectl version --client

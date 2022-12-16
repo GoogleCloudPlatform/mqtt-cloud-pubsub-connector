@@ -28,7 +28,6 @@ echo "This script directory path is: ${SCRIPT_DIRECTORY_PATH}"
 . "${SCRIPT_DIRECTORY_PATH}/common.sh"
 
 FIX_LINTING_ERRORS_DESCRIPTION="Automatically fix linting errors."
-PUSH_CONTAINER_IMAGE_REGISTRY_DESCRIPTION="Push the container image to the provided registry."
 
 usage() {
   echo
@@ -40,7 +39,6 @@ usage() {
   echo "OPTIONS"
   echo "  -f $(is_linux && echo "| --fix-linting-errors"): ${FIX_LINTING_ERRORS_DESCRIPTION}"
   echo "  -h $(is_linux && echo "| --help"): ${HELP_DESCRIPTION}"
-  echo "  -p $(is_linux && echo "| --push-container-image"): ${PUSH_CONTAINER_IMAGE_REGISTRY_DESCRIPTION}"
   echo
   echo "EXIT STATUS"
   echo
@@ -51,8 +49,8 @@ usage() {
   echo "  ${ERR_ARGUMENT_EVAL_ERROR} when there was an error while evaluating the program options."
 }
 
-LONG_OPTIONS="fix-linting-errors,help,push-container-image:"
-SHORT_OPTIONS="fhp:"
+LONG_OPTIONS="fix-linting-errors,help"
+SHORT_OPTIONS="fh"
 
 # BSD getopt (bundled in MacOS) doesn't support long options, and has different parameters than GNU getopt
 if is_linux; then
@@ -70,10 +68,6 @@ if [ ! ${RET_CODE} ]; then
 fi
 eval set -- "${TEMP}"
 
-CONTAINER_IMAGE_ID="google-cloud-platform/mqtt-to-cloud-pubsub-connector"
-CONTAINER_IMAGE_TAG="latest"
-DEVCONTAINER_IMAGE_TAG="latest"
-DEVCONTAINER_CLI_IMAGE_TAG="latest"
 FIX_LINTING_ERRORS="false"
 PUSH_CONTAINER_IMAGE_REGISTRY=
 
@@ -82,11 +76,6 @@ while true; do
   -f | --fix-linting-errors)
     FIX_LINTING_ERRORS="true"
     shift
-    break
-    ;;
-  -p | --push-container-image)
-    PUSH_CONTAINER_IMAGE_REGISTRY="${2}"
-    shift 2
     break
     ;;
   --)
@@ -103,12 +92,6 @@ while true; do
   esac
 done
 
-# Setting this here because we might have changed it when processing options
-CONTAINER_IMAGE_FULL_ID="${CONTAINER_IMAGE_ID}:${CONTAINER_IMAGE_TAG}"
-DEVCONTAINER_IMAGE_FULL_ID="${CONTAINER_IMAGE_ID}-devcontainer:${DEVCONTAINER_IMAGE_TAG}"
-
-check_exec_dependency "docker"
-
 echo "Building the devcontainer container image: ${DEVCONTAINER_IMAGE_FULL_ID}"
 
 docker build \
@@ -116,51 +99,25 @@ docker build \
   --tag "${DEVCONTAINER_IMAGE_FULL_ID}" \
   .
 
-WORKSPACE_DIRECTORY_SOURCE_PATH="$(pwd)"
-
-DOCKER_FLAGS=
-if [ -t 0 ]; then
-  DOCKER_FLAGS=-it
-fi
-
 if [ "${FIX_LINTING_ERRORS}" = "true" ]; then
   echo "Fixing linting errors..."
-  docker run \
-    ${DOCKER_FLAGS} \
-    --env "JAVA_HOME=/usr/lib/jvm/msopenjdk-current" \
-    --rm \
-    --volume "${WORKSPACE_DIRECTORY_SOURCE_PATH}":"/workspace" \
-    --volume /var/run/docker.sock:/var/run/docker.sock \
-    --workdir "/workspace" \
-    "${DEVCONTAINER_IMAGE_FULL_ID}" \
-    ./gradlew :spotlessApply
+  run_devcontainer ./gradlew :spotlessApply
 fi
 
 echo "Running the dev container to build the project: ${DEVCONTAINER_IMAGE_FULL_ID}"
+run_devcontainer ./gradlew --info clean build
 
-docker run \
-  ${DOCKER_FLAGS} \
-  --env "JAVA_HOME=/usr/lib/jvm/msopenjdk-current" \
-  --rm \
-  --volume "${WORKSPACE_DIRECTORY_SOURCE_PATH}":"/workspace" \
-  --volume /var/run/docker.sock:/var/run/docker.sock \
-  --workdir "/workspace" \
-  "${DEVCONTAINER_IMAGE_FULL_ID}" \
-  ./gradlew clean build
-
-echo "Building the project container image: ${CONTAINER_IMAGE_FULL_ID}"
+echo "Building the project container image: ${MQTT_CLOUD_PUBSUB_CONNECTOR_CONTAINER_IMAGE_FULL_ID}"
 docker build \
-  --tag "${CONTAINER_IMAGE_FULL_ID}" \
+  --tag "${MQTT_CLOUD_PUBSUB_CONNECTOR_CONTAINER_IMAGE_FULL_ID}" \
   .
 
-if [ -n "${PUSH_CONTAINER_IMAGE_REGISTRY}" ]; then
-  CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY="${PUSH_CONTAINER_IMAGE_REGISTRY}/${CONTAINER_IMAGE_FULL_ID}"
-
-  echo "Tagging ${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
-  docker image tag "${CONTAINER_IMAGE_FULL_ID}" "${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
-
-  echo "Pushing ${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
-  docker image push \
-    --all-tags \
-    "${CONTAINER_IMAGE_FULL_ID_PLUS_REGISTRY}"
+if [ ! -e "${MQTT_BROKER_BENCHMARK_DIRECTORY_PATH}" ]; then
+  git clone https://github.com/emqx/emqtt-bench.git
+  git -C "${MQTT_BROKER_BENCHMARK_DIRECTORY_PATH}" checkout "0.4.7"
 fi
+
+docker build \
+  --file "${MQTT_BROKER_BENCHMARK_DIRECTORY_PATH}/Dockerfile" \
+  --tag "${MQTT_BROKER_BENCHMARKER_CONTAINER_IMAGE_FULL_ID}" \
+  "${MQTT_BROKER_BENCHMARK_DIRECTORY_PATH}"

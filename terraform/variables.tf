@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+variable "cloud_pubsub_destination_topic_name" {
+  description = "The Cloud Pub/Sub topic where to save messages from MQTT"
+  default     = "destination-topic"
+}
+
 variable "google_default_project_id" {
   description = "The default Google Cloud project ID"
   type        = string

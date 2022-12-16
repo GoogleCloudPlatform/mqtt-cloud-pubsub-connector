@@ -46,10 +46,6 @@ usage() {
 LONG_OPTIONS="help"
 SHORT_OPTIONS="h"
 
-echo "Checking if the necessary dependencies are available..."
-check_exec_dependency "docker"
-check_exec_dependency "getopt"
-
 # BSD getopt (bundled in MacOS) doesn't support long options, and has different parameters than GNU getopt
 if is_linux; then
   TEMP="$(getopt -o "${SHORT_OPTIONS}" --long "${LONG_OPTIONS}" -n "${SCRIPT_BASENAME}" -- "$@")"
@@ -83,6 +79,13 @@ while true; do
 done
 
 check_optional_argument "${TERRAFORM_SUBCOMMAND}" "${TERRAFORM_SUBCOMMAND_DESCRIPTION}"
+
+build_gcloud_container_image
+
+if ! check_gcloud_authentication; then
+  echo "Authenticating with Google Cloud..."
+  authenticate_gcloud
+fi
 
 CURRENT_WORKING_DIRECTORY="$(pwd)"
 TERRAFORM_ENVIRONMENT_DIR="${CURRENT_WORKING_DIRECTORY}/terraform"

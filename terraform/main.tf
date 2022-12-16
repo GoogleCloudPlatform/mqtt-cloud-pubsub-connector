@@ -16,16 +16,8 @@ data "google_project" "default_project" {
   project_id = var.google_default_project_id
 }
 
-data "google_client_config" "default" {}
-
 provider "google" {
   project = var.google_default_project_id
   region  = var.google_default_region
   zone    = var.google_default_zone
 }
-
-# provider "kubernetes" {
-#   host                   = "https://${module.gke.endpoint}"
-#   token                  = data.google_client_config.default.access_token
-#   cluster_ca_certificate = base64decode(module.gke.ca_certificate)
-# }

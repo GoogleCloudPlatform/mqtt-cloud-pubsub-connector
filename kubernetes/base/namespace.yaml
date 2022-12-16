@@ -12,13 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_artifact_registry_repository" "mqtt_cloud_pubsub_container_image_repository" {
-  location      = var.google_artifact_registry_location
-  repository_id = "mqtt-cloud-pubsub-container-image-repository"
-  description   = "MQTT <-> Cloud Pub/Sub container image repository"
-  format        = "DOCKER"
-
-  depends_on = [
-    module.project-services
-  ]
-}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mqtt-cloud-pubsub-connector
