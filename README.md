@@ -9,10 +9,10 @@ at interfacing [MQTT](https://mqtt.org/) brokers and clients with
 To provision and configure an environment to perform testing and validation experiments
 on Google Cloud, we provide the necessary infrastructure-as-code descriptors:
 
-- [terraform](terraform): This directory contains all the necessary [Terraform](https://www.terraform.io/)
+- `terraform`: This directory contains all the necessary [Terraform](https://www.terraform.io/)
     descriptors to provision the runtime environment in an existing
     [Google Cloud project](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#projects).
-- [terraform-init](terraform-init): This directory contains all the necessary Terraform descriptors
+- `terraform-init`: This directory contains all the necessary Terraform descriptors
     to provision a Google Cloud project and a Google Cloud Storage bucket to use as a
     remote [Terraform backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
 
@@ -24,43 +24,59 @@ To provision a test and validation runtime environment on Google Cloud, you need
 To provision the resources for the testing and validation runtime environment, do the following:
 
 1. Change your working directory to the root directory of this repository.
-1. Set the values of the configuration variables for your environment by editing the `terraform-init/terraform.tfvars`.
-    You need to provide the values for the variables defined in `terraform-init/variables.tf`. For more information about
-    each variable, refer to their descriptions in `terraform-init/variables.tf`.
+1. Provision the environment on Google Cloud by following either the [Provision the environment on Google Cloud in a new project](#provision-the-environment-on-google-cloud-in-a-new-project)
+    section or the [Provision the environment on Google Cloud in an existing project](#provision-the-environment-on-google-cloud-in-an-existing-project) section.
 
-    For example:
+### Provision the environment on Google Cloud in a new project
 
-    ```hcl
-    billing_account_id                     = "ABCDEF-GHIJK-123456"
-    google_project_id                      = "project-id"
-    organization_id                        = "123456789"
-    terraform_state_production_bucket_name = "terraform-state"
+To provision all the Google Cloud resources for the testing and validation runtime environment, including a Google Cloud
+project to create those resources into, and a Cloud Storage bucket to store Terraform backend data, do the following:
+
+1. Run the cloud resources provisioning script:
+
+    ```sh
+    scripts/provision-cloud-infrastructure.sh
     ```
 
-1. Run the resource provisioning script:
+    The script guides you in providing the necessary configuration data.
 
-```sh
-scripts/provision-cloud-infrastructure.sh
-```
+### Provision the environment on Google Cloud in an existing project
 
-1. Run the build script:
+If you provisioned the environment by following the guidance in [Provision the environment on Google Cloud in a new project](#provision-the-environment-on-google-cloud-in-a-new-project),
+skip this section.
 
-```sh
-scripts/build.sh
-```
+If you want to provision a test and validation runtime environment in an existing Google Cloud project, do the following:
+
+1. Create a Google Cloud project.
+1. Create a Cloud Storage bucket to store Terraform backend data.
+1. Run the cloud resources provisioning script:
+
+    ```sh
+    scripts/provision-cloud-infrastructure.sh --no-provision-google-cloud-project
+    ```
+
+    The script guides you in providing the necessary configuration data.
+
+### Deploy workloads
+
+1. Run the workload build script:
+
+    ```sh
+    scripts/build.sh
+    ```
 
 1. Run the workload deployment script:
 
-```sh
-scripts/deploy-workloads.sh
-```
+    ```sh
+    scripts/deploy-workloads.sh
+    ```
 
 ### Clean up
 
-If you want to delete all the resources in the environment, run the following command:
+To delete all the resources and workloads in the environment, run the following command:
 
 ```sh
-scripts/destroy-cloud-infrastructure.sh
+scripts/provision-cloud-infrastructure.sh --terraform-subcommand "destroy"
 ```
 
 ## Development environment

@@ -30,6 +30,8 @@ ERR_MISSING_DEPENDENCY=3
 ERR_ARGUMENT_EVAL_ERROR=4
 # shellcheck disable=SC2034
 ERR_DIRECTORY_NOT_FOUND=5
+# shellcheck disable=SC2034
+ERR_MISSING_CONFIGURATION_FILE=6
 
 # shellcheck disable=SC2034
 HELP_DESCRIPTION="show this help message and exit"
