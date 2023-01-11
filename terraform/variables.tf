@@ -15,6 +15,7 @@
 variable "cloud_pubsub_destination_topic_name" {
   description = "The Cloud Pub/Sub topic where to save messages from MQTT"
   default     = "destination-topic"
+  type        = string
 }
 
 variable "google_default_project_id" {

@@ -26,6 +26,7 @@ spec:
       name: notls
       port: 1883
       targetPort: 1883
+...
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -77,3 +78,4 @@ spec:
             items:
               - key: "mosquitto.conf"
                 path: "mosquitto.conf"
+...

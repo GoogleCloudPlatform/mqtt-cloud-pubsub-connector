@@ -101,7 +101,8 @@ public abstract class AbstractContainerResource implements QuarkusTestResourceLi
       configProviderResolver.registerConfig(configBuilder.build(), classLoader);
     } catch (IllegalStateException e) {
       LOG.infof(
-          "There's already a configuration source registered for the %s class loader. Skipping property source registration.",
+          "There's already a configuration source registered for the %s class loader. Skipping"
+              + " property source registration.",
           classLoader.getName());
     }
 

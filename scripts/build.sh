@@ -69,7 +69,6 @@ fi
 eval set -- "${TEMP}"
 
 FIX_LINTING_ERRORS="false"
-PUSH_CONTAINER_IMAGE_REGISTRY=
 
 while true; do
   case "${1}" in
@@ -87,10 +86,50 @@ while true; do
     # Ignoring because those are defined in common.sh, and don't need quotes
     # shellcheck disable=SC2086
     exit $EXIT_OK
-    break
     ;;
   esac
 done
+
+echo "Running lint checks"
+
+_DOCKER_INTERACTIVE_TTY_OPTION=
+if [ -t 0 ]; then
+  _DOCKER_INTERACTIVE_TTY_OPTION="-it"
+fi
+
+LINTER_CONTAINER_IMAGE="ghcr.io/github/super-linter:${LINTER_CONTAINER_IMAGE_VERSION:-"latest"}"
+
+if [ "${UPDATE_CONTAINER_IMAGE:-}" = "true" ]; then
+  docker pull "${LINTER_CONTAINER_IMAGE}"
+fi
+
+# shellcheck disable=SC2086
+docker run \
+  ${_DOCKER_INTERACTIVE_TTY_OPTION} \
+  --env ACTIONS_RUNNER_DEBUG="${ACTIONS_RUNNER_DEBUG:-"false"}" \
+  --env ANSIBLE_DIRECTORY="${ANSIBLE_DIRECTORY:-"/ansible"}" \
+  --env DEFAULT_WORKSPACE=/tmp/lint \
+  --env DISABLE_ERRORS="false" \
+  --env ERROR_ON_MISSING_EXEC_BIT="true" \
+  --env IGNORE_GITIGNORED_FILES="true" \
+  --env JAVA_FILE_NAME="google_checks.xml" \
+  --env KUBERNETES_KUBEVAL_OPTIONS="--strict --ignore-missing-schemas --schema-location https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/" \
+  --env LINTER_RULES_PATH="${LINTER_RULES_PATH:-"config/lint"}" \
+  --env MULTI_STATUS="false" \
+  --env RUN_LOCAL="true" \
+  --env SUPPRESS_POSSUM="true" \
+  --env TEST_CASE_RUN="${TEST_CASE_RUN:-"false"}" \
+  --env VALIDATE_ALL_CODEBASE="true" \
+  --env VALIDATE_JSCPD_ALL_CODEBASE="${VALIDATE_JSCPD_ALL_CODEBASE:-"true"}" \
+  --name "super-linter" \
+  --rm \
+  --volume "$(pwd)":/tmp/lint \
+  --volume /etc/localtime:/etc/localtime:ro \
+  --workdir /tmp/lint \
+  "${LINTER_CONTAINER_IMAGE}" \
+  "$@"
+
+unset _DOCKER_INTERACTIVE_TTY_OPTION
 
 echo "Building the devcontainer container image: ${DEVCONTAINER_IMAGE_FULL_ID}"
 

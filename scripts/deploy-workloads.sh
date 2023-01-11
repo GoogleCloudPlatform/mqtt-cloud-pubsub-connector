@@ -73,7 +73,6 @@ while true; do
     # Ignoring because those are defined in common.sh, and don't need quotes
     # shellcheck disable=SC2086
     exit $EXIT_OK
-    break
     ;;
   esac
 done
@@ -188,10 +187,10 @@ else
 fi
 
 echo "Configuring authentication for the ${_CONTAINER_IMAGE_REPOSITORY_ID} repository"
-run_containerized_gcloud auth print-access-token \
-  | docker login \
-  --username oauth2accesstoken \
-  --password-stdin "https://${_CONTAINER_IMAGE_REPOSITORY_HOSTNAME}"
+run_containerized_gcloud auth print-access-token |
+  docker login \
+    --username oauth2accesstoken \
+    --password-stdin "https://${_CONTAINER_IMAGE_REPOSITORY_HOSTNAME}"
 
 echo "Pushing container images to the ${_CONTAINER_IMAGE_REPOSITORY_ID} registry"
 tag_and_push_container_image "${MQTT_BROKER_CONTAINER_IMAGE_ID}" "${_MQTT_BROKER_CONTAINER_IMAGE_LOCALIZED_ID}"

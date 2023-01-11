@@ -17,6 +17,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: mqtt-cloud-pubsub-connector
+...
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -62,3 +63,4 @@ spec:
                 path: "application.properties"
               - key: "application-prod.properties"
                 path: "application-prod.properties"
+...

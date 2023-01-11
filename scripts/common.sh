@@ -41,28 +41,39 @@ CURRENT_WORKING_DIRECTORY="$(pwd)"
 TERRAFORM_ENVIRONMENT_DIR="${CURRENT_WORKING_DIRECTORY}/terraform"
 TERRAFORM_INIT_ENVIRONMENT_DIR="${CURRENT_WORKING_DIRECTORY}/terraform-init"
 
+# shellcheck disable=SC2034
 TERRAFORM_INIT_VARIABLES_FILE_PATH="${TERRAFORM_INIT_ENVIRONMENT_DIR}/terraform.tfvars"
 
+# shellcheck disable=SC2034
 TERRAFORM_BACKEND_CONFIGURATION_FILE_PATH="${TERRAFORM_ENVIRONMENT_DIR}/gcs-backend.conf"
+# shellcheck disable=SC2034
 TERRAFORM_VARIABLES_FILE_PATH="${TERRAFORM_ENVIRONMENT_DIR}/terraform.tfvars"
 
 WORKLOADS_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH="${CURRENT_WORKING_DIRECTORY}/kubernetes"
 
 MQTT_BROKER_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH="${WORKLOADS_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/mosquitto"
+# shellcheck disable=SC2034
 MQTT_BROKER_KUSTOMIZE_FILE_PATH="${MQTT_BROKER_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/kustomization.yaml"
 
 MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH="${WORKLOADS_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/mqtt-cloud-pubsub-connector"
 MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_CONFIGURATION_DIRECTORY_PATH="${MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/config"
+# shellcheck disable=SC2034
 MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_GENERATED_APPLICATION_CONFIGURATION_PATH="${MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_CONFIGURATION_DIRECTORY_PATH}/application.properties"
+# shellcheck disable=SC2034
 MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_GENERATED_APPLICATION_CLOUD_ENVIRONMENT_CONFIGURATION_PATH="${MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_CONFIGURATION_DIRECTORY_PATH}/application-prod.properties"
+# shellcheck disable=SC2034
 MQTT_CLOUD_PUBSUB_CONNECTOR_KUSTOMIZE_FILE_PATH="${MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/kustomization.yaml"
+# shellcheck disable=SC2034
 MQTT_CLOUD_PUBSUB_CONNECTOR_WORKLOAD_IDENTITY_PATCH_FILE_PATH="${MQTT_CLOUD_PUBSUB_CONNECTOR_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/mqtt-cloud-pubsub-connector-workload-identity-annotation-patch.yaml"
 
+# shellcheck disable=SC2034
 MQTT_BROKER_BENCHMARK_DIRECTORY_PATH="${CURRENT_WORKING_DIRECTORY}/emqtt-bench"
 MQTT_BROKER_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH="${WORKLOADS_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/mqtt-benchmarker"
+# shellcheck disable=SC2034
 MQTT_BENCHMARKER_KUSTOMIZE_FILE_PATH="${MQTT_BROKER_DEPLOYMENT_DESCRIPTORS_DIRECTORY_PATH}/kustomization.yaml"
 
 CONTAINER_ENGINE_USER_CONFIGURATION_DIRECTORY_PATH="${HOME}/.docker"
+# shellcheck disable=SC2034
 CONTAINER_ENGINE_USER_CONFIGURATION_FILE_PATH="${CONTAINER_ENGINE_USER_CONFIGURATION_DIRECTORY_PATH}/config.json"
 
 WORKSPACE_DESTINATION_PATH="/workspace"
@@ -131,7 +142,7 @@ check_optional_argument() {
 }
 
 get_simple_java_property() {
-    grep "^${2}=" "${1}" | cut -d'=' -f2
+  grep "^${2}=" "${1}" | cut -d'=' -f2
 }
 
 # Load container image IDs from Java property files when possible to use the same container images in scripts and Java test suites
@@ -199,14 +210,16 @@ GCLOUD_AUTHENTICATION_CONTAINER_NAME="gcloud-config"
 build_gcloud_container_image() {
   echo "Building the Google Cloud SDK container image"
   docker build \
-  --file ./container-images/gcloud-sdk/Dockerfile \
-  --tag "${GCLOUD_CLI_CONTAINER_IMAGE_ID}" \
-  .
+    --file ./container-images/gcloud-sdk/Dockerfile \
+    --tag "${GCLOUD_CLI_CONTAINER_IMAGE_ID}" \
+    .
 }
 
 run_gcloud_container_image() {
   _EXECUTABLE_NAME="${1}"
   shift
+
+  # shellcheck disable=SC2086
   docker run \
     ${DOCKER_FLAGS} \
     --env GOOGLE_APPLICATION_CREDENTIALS="/root/.config/gcloud/application_default_credentials.json" \
@@ -221,6 +234,7 @@ run_gcloud_container_image() {
 }
 
 run_devcontainer() {
+  # shellcheck disable=SC2086
   docker run \
     ${DOCKER_FLAGS} \
     --env "JAVA_HOME=/usr/lib/jvm/msopenjdk-current" \
@@ -243,6 +257,8 @@ run_containerized_kubectl() {
 run_containerized_kustomize() {
   _KUSTOMIZE_ENVIRONMENT_DIR_NAME="${1}"
   shift
+
+  # shellcheck disable=SC2086
   docker run \
     ${DOCKER_FLAGS} \
     --rm \
@@ -283,6 +299,7 @@ cleanup_gcloud_authentication() {
 authenticate_gcloud() {
   cleanup_gcloud_authentication
 
+  # shellcheck disable=SC2086
   docker run \
     ${DOCKER_FLAGS} \
     --name "${GCLOUD_AUTHENTICATION_CONTAINER_NAME}" \
@@ -323,7 +340,7 @@ run_containerized_terraform() {
   # "${HOME}"/.config/gcloud/application_default_credentials.json is a
   # well-known location for application-default credentials
 
-  # shecllcheck disable=SC2068
+  # shellcheck disable=SC2086
   docker run \
     ${DOCKER_FLAGS} \
     --env GOOGLE_APPLICATION_CREDENTIALS="/root/.config/gcloud/application_default_credentials.json" \

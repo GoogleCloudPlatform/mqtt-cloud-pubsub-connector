@@ -84,7 +84,7 @@ scripts/provision-cloud-infrastructure.sh --terraform-subcommand "destroy"
 To setup a development environment, we designed a [Visual Studio Code Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)
 that includes all the necessary tooling and Visual Studio Code (VS Code) extensions that you
 need to work on this project. We use this dev container to build the project from
-both VS Code and the command line.
+both VS Code and the command-line.
 
 ### Dev container configuration
 
@@ -118,10 +118,10 @@ To ensure that things work as expected, we developed a comprehensive integration
 containerized instances of Mosquitto (an open-source MQTT broker) and the Cloud Pub/Sub emulator to
 simulate a runtime environment.
 
-You can run the test suite either from Visual Studio Code, or from the command line, after cloning this
+You can run the test suite either from Visual Studio Code, or from the command-line, after cloning this
 repository.
 
-#### Run tests from Visual Studio Code
+#### Run Java unit and integration tests from Visual Studio Code
 
 To run tests from Visual Studio Code:
 
@@ -130,9 +130,9 @@ To run tests from Visual Studio Code:
 2. Open the `Java Projects` panel or open the a JUnit test file from `src/test/java`.
 3. Click on the _play_ icon near the test or the test suite that you want to run.
 
-#### Run tests from the command line
+#### Run the full test suite from the command-line
 
-To run tests from the command line, do the following:
+To run tests from the command-line, do the following:
 
 1. Open a POSIX-compliant shell.
 2. Change your working directory to the root directory of this repository.
@@ -154,19 +154,19 @@ To automatically fix linting errors that the linter finds, do the following:
     scripts/build.sh --fix-linting-errors
     ```
 
-### Details about the command line build process
+### Details about the command-line build process
 
-To build this project from the command line, we use the same dev container that
+To build this project from the command-line, we use the same dev container that
 we designed to build the project from inside VS Code. The build process does the
 following:
 
 1. Run a dev container instance to build the process.
-1. Run the project build process inside the dev container.
-1. The project build process:
+2. Run the project build process inside the dev container.
+3. The project build process:
     1. Builds all the project assets.
-    1. Runs the unit tests suite.
-    1. Runs the containers that the integration tests suite needs.
-    1. Runs the integration tests suite.
-    1. Finalizes the project build by packaging project assets.
+    2. Runs the unit tests suite.
+    3. Runs the containers that the integration tests suite needs.
+    4. Runs the integration tests suite.
+    5. Finalizes the project build by packaging project assets.
 
 All these container management tools share the same container runtime environment.

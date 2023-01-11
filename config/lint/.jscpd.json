@@ -1,0 +1,14 @@
+{
+  "threshold": 5,
+  "reporters": [
+    "consoleFull"
+  ],
+  "ignore": [
+    "**/.terraform/**",
+    "**/.venv*/**",
+    "**/bin/**",
+    "**/build/**",
+    "**/emqtt-bench/**"
+  ],
+  "absolute": true
+}

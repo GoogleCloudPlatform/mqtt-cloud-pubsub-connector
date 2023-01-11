@@ -46,6 +46,7 @@ usage() {
   echo "  ${ERR_VARIABLE_NOT_DEFINED} when a parameter or a variable is not defined, or empty."
   echo "  ${ERR_MISSING_DEPENDENCY} when a required dependency is missing."
   echo "  ${ERR_ARGUMENT_EVAL_ERROR} when there was an error while evaluating the program options."
+  echo "  ${ERR_MISSING_CONFIGURATION_FILE} when a required configuration file is missing."
 }
 
 LONG_OPTIONS="help,no-provision-google-cloud-project,terraform-subcommand:"
@@ -90,7 +91,6 @@ while true; do
     # Ignoring because those are defined in common.sh, and don't need quotes
     # shellcheck disable=SC2086
     exit $EXIT_OK
-    break
     ;;
   esac
 done
@@ -110,14 +110,13 @@ if [ "${PROVISION_GOOGLE_CLOUD_PROJECT_AND_BUCKET}" = "true" ]; then
   if [ ! -f "${TERRAFORM_INIT_VARIABLES_FILE_PATH}" ]; then
     echo "[ERROR] ${TERRAFORM_INIT_VARIABLES_FILE_PATH} not found."
     echo "Create ${TERRAFORM_INIT_VARIABLES_FILE_PATH} with the following contents:"
-    cat << EOF
+    cat <<EOF
 billing_account_id                     = "<billing account id>"
 google_project_id                      = "<google cloud project id>"
 organization_id                        = "<google cloud organization id>"
 terraform_state_production_bucket_name = "terraform-state"
 EOF
-    echo "For more information about each variable, refer to their descriptions in `terraform-init/variables.tf`."
-
+    echo "For more information about each variable, refer to their descriptions in terraform-init/variables.tf."
   fi
 
   run_containerized_terraform "${TERRAFORM_INIT_ENVIRONMENT_DIR}" version
