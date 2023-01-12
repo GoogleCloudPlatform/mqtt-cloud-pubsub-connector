@@ -1,0 +1,3 @@
+# Install numpy as recommended by the IAP documentation
+# See https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+numpy==1.24.1 --hash=sha256:ef85cf1f693c88c1fd229ccd1055570cb41cdf4875873b7728b6301f12cd05bf
