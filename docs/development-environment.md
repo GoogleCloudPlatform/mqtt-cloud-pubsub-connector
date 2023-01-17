@@ -86,8 +86,9 @@ To automatically fix linting errors that Spotless finds, do the following:
 
 #### Lint configuration
 
-All the linters have their configuration stored in the `config/lint` directory. Also, some linters shipped
-within `super-linter`, also take the [.editorconfig](../.editorconfig) file into account.
+All the linters have their configuration stored in the `config/lint` directory.
+Additionally, some linters shipped within `super-linter` also take the
+[EditorConfig configuration file](../.editorconfig) into account.
 
 ## Details about the command-line build process
 

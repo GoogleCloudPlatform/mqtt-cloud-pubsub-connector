@@ -1,0 +1,82 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+name: Build container images
+
+env:
+  CONTAINER_IMAGE_REGISTRY: ghcr.io
+
+on:  # yamllint disable-line rule:truthy
+  - push
+  - pull_request
+
+jobs:
+  build-container-images:
+    env:
+      CONTAINER_IMAGE_ID: "${{ github.repository }}-${{ matrix.container-images.name }}"
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4.3.0
+        with:
+          images: |
+            ${{ env.CONTAINER_IMAGE_REGISTRY }}/${{ env.CONTAINER_IMAGE_ID }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+      - name: Build the ${{ matrix.container-images.name }} container image
+        uses: docker/build-push-action@v3
+        with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          context: ${{ matrix.container-images.context-directory }}
+          file: ${{ matrix.container-images.file }}
+          labels: ${{ steps.meta.outputs.labels }}
+          load: true
+          tags: ${{ steps.meta.outputs.tags }}
+    strategy:
+      matrix:
+        # We don't build the MQTT to Cloud Pub/Sub Connector here because we
+        # want to reuse scripts/build.sh
+        container-images:
+          - name: devcontainer
+            context-directory: "."
+            file: ".devcontainer/Dockerfile"
+
+  build-mqtt-cloud-pubsub-connector:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build the MQTT <-> Cloud Pub/Sub Connector container image
+        run: scripts/build.sh
+...

@@ -80,6 +80,14 @@ WORKSPACE_DESTINATION_PATH="/workspace"
 
 COMPUTE_ENGINE_SSH_PRIVATE_KEY_DESTINATION_PATH="/root/.ssh/google_compute_engine"
 
+is_ci() {
+  if [ "${GITHUB_ACTIONS:-}" = "true" ] || [ "${CI:-}" = "true" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 check_exec_dependency() {
   EXECUTABLE_NAME="${1}"
 

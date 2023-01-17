@@ -34,7 +34,7 @@ trim_trailing_whitespace = true
 spaces_around_operators = true
 spaces_around_brackets = false
 
-[*.{gradle,java,json,lock.hcl,sh,tf,yml,yaml}]
+[*.{gradle,java,json,lock.hcl,md,sh,tf,yml,yaml}]
 indent_size = 2
 
 # To match the Google Java Style Guide: https://google.github.io/styleguide/javaguide.html

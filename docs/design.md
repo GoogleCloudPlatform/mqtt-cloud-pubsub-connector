@@ -152,10 +152,10 @@ a relatively low-level programming language and considering that we have Go amon
 
 - Programming language:
   - Excluding C and C++, and languages that don’t have a feature-complete MQTT Eclipse Paho library, we are left with
-  Java and Python.
+    Java and Python.
   - After assessing the [gRPC benchmark results](https://grpc.io/docs/guides/benchmarking/), and considering the
-  potentially high scalability requirements that this connector has to support, we choose a Java-based implementation
-  for this component.
+    potentially high scalability requirements that this connector has to support, we choose a Java-based implementation
+    for this component.
 
 - Frameworks and libraries:
   - Frameworks: [Quarkus](https://quarkus.io/)
