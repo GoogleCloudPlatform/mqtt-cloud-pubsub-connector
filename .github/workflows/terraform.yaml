@@ -15,7 +15,9 @@
 ---
 name: Terraform
 
-on: [push, pull_request]
+on:  # yamllint disable-line rule:truthy
+  push: null
+  pull_request: null
 
 jobs:
   terraform:

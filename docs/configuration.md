@@ -51,7 +51,7 @@ Where:
 - `<cloud-pubsub-project-id>` is the Google Cloud project ID where you provisioned the Cloud Pub/Sub
     instance to connect to.
 
-## Map MQTT topics to Cloud Pub/Sub topics
+## Map a MQTT topic to a Cloud Pub/Sub topic
 
 To map a MQTT topic to a Cloud Pub/Sub topic, provide the following options:
 
@@ -66,6 +66,14 @@ Where:
     messages sent to this MQTT topic to Cloud Pub/Sub.
 - `<destination-cloud-pubsub-topic>` is the destination Cloud Pub/Sub topic. The Connector will
     forward MQTT messages to this topic.
+
+### Map multiple MQTT topics to a Cloud Pub/Sub topic
+
+The `<source-mqtt-topic>` configuration option supports
+[wildcard MQTT subscriptions](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901242).
+By setting it a wildcard MQTT subscription, you can forward MQTT messages sent to the MQTT topics
+that match with the wildcard subscription to the Cloud Pub/Sub topic that you configured with the
+`<destination-cloud-pubsub-topic>` option, as described above.
 
 ## Other configuration options
 

@@ -69,7 +69,7 @@ public abstract class AbstractContainerResource implements QuarkusTestResourceLi
 
   /**
    * Get the class of the {@link java.lang.annotation.Annotation Annotation} used to mark fields to
-   * inject the {@link org.testcontainers.containers.GenericContainer GenericContainer} object
+   * inject the {@link org.testcontainers.containers.GenericContainer GenericContainer} object.
    *
    * @return a {@link java.lang.Class Class} object representing the Annotation
    */

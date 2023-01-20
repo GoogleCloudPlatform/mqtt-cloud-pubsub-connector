@@ -167,11 +167,11 @@ a relatively low-level programming language and considering that we have Go amon
       feature-complete ones, at the time of writing.
     - [Google Pubsub :: Apache Camel](https://camel.apache.org/components/2.x/google-pubsub-component.html)
 
-- MQTT topics
+- MQTT topics:
   - Subscribes to: MQTT topics whose messages are to forward to Cloud Pub/Sub topics.
   - Publishes messages to: MQTT topics where Cloud Pub/Sub messages are being forwarded to from Cloud Pub/Sub topics.
 
-- Cloud Pub/Sub topics
+- Cloud Pub/Sub topics:
   - Subscribes to: Cloud Pub/Sub topics whose messages are to forward to MQTT topics.
   - Publishes messages to: Cloud Pub/Sub topics where MQTT messages are being forwarded to from MQTT topics.
 - Authentication to Google Cloud services: the Cloud Pub/Sub client uses Application Default Credentials to authenticate.

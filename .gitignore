@@ -14,6 +14,7 @@
 
 # Gradle
 .gradle/
+.gradle-cache/
 build/
 
 # Eclipse
@@ -67,3 +68,6 @@ gcs-backend.conf
 
 # Ignore the MQTT broker benchmark suite
 emqtt-bench/
+
+# Temporary files
+*.hprof

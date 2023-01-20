@@ -133,11 +133,11 @@ docker build \
 
 if [ "${FIX_LINTING_ERRORS}" = "true" ]; then
   echo "Fixing linting errors..."
-  run_devcontainer ./gradlew :spotlessApply
+  run_devcontainer ./gradlew --no-daemon :spotlessApply
 fi
 
 echo "Running the dev container to build the project: ${DEVCONTAINER_IMAGE_FULL_ID}"
-run_devcontainer ./gradlew --info clean build
+run_devcontainer ./gradlew --info --no-daemon clean build
 
 echo "Building the project container image: ${MQTT_CLOUD_PUBSUB_CONNECTOR_CONTAINER_IMAGE_FULL_ID}"
 docker build \

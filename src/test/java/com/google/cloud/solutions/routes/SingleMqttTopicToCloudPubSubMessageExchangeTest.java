@@ -14,8 +14,6 @@
 
 package com.google.cloud.solutions.routes;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.google.cloud.solutions.profiles.SingleMqttTopicNameProfile;
 import com.google.cloud.solutions.resources.AbstractContainerResource;
 import com.google.cloud.solutions.resources.CloudPubSubResource;
@@ -24,8 +22,6 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.TestProfile;
-import javax.inject.Inject;
-import org.junit.jupiter.api.Test;
 
 @QuarkusTest
 @QuarkusTestResource(
@@ -45,26 +41,5 @@ import org.junit.jupiter.api.Test;
           value = "com.google.cloud.solutions.mqtt-client.cloud-pubsub-container-image-id")
     })
 @TestProfile(SingleMqttTopicNameProfile.class)
-public class MqttToCloudPubSubRouteTest {
-
-  @Inject MqttToCloudPubSubRoute mqttToCloudPubSubRoute;
-
-  @Test
-  public void testMqttToCloudPubSubRouteId() {
-    String mqttToCloudPubSubRouteId = mqttToCloudPubSubRoute.getMqttToCloudPubSubRouteId();
-    assertThat(mqttToCloudPubSubRouteId).isNotBlank();
-    assertThat(mqttToCloudPubSubRouteId)
-        .startsWith(MqttToCloudPubSubRoute.MQTT_TO_CLOUD_PUB_SUB_ROUTE_ID_PREFIX);
-  }
-
-  @Test
-  public void testMqttToCloudPubSubFromSourceTopicMqttClientId() {
-    String mqttToCloudPubSubRouteMqttClientId =
-        mqttToCloudPubSubRoute.getFromSourceTopicMqttClientId();
-    assertThat(mqttToCloudPubSubRouteMqttClientId).isNotBlank();
-    assertThat(mqttToCloudPubSubRouteMqttClientId)
-        .startsWith(
-            MqttToCloudPubSubRoute.MQTT_CLIENT_ID_PREFIX
-                + MqttToCloudPubSubRoute.MQTT_CLIENT_ID_FROM_SOURCE_TOPIC_PREFIX);
-  }
-}
+public class SingleMqttTopicToCloudPubSubMessageExchangeTest
+    extends AbstractMqttToCloudPubSubMessageExchangeTest {}
