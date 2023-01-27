@@ -19,7 +19,7 @@ locals {
 # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/master/modules/beta-autopilot-private-cluster
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-private-cluster"
-  version = "24.0.0"
+  version = "24.1.0"
 
   datapath_provider               = "ADVANCED_DATAPATH"
   deploy_using_private_endpoint   = true
@@ -53,7 +53,7 @@ module "gke" {
 
 module "mqtt_cloud_pubsub_connector_workload_identity" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
-  version = "24.0.0"
+  version = "24.1.0"
 
   name       = "mqtt-cloud-pubsub-connector"
   namespace  = "mqtt-cloud-pubsub-connector"
