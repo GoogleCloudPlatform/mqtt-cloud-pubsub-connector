@@ -17,7 +17,7 @@
 # https://registry.terraform.io/modules/terraform-google-modules/bastion-host/google/latest
 module "iap_bastion" {
   source  = "terraform-google-modules/bastion-host/google"
-  version = "5.1.1"
+  version = "5.2.0"
 
   disk_type      = "pd-ssd"
   network        = module.gcp_network.network_name
