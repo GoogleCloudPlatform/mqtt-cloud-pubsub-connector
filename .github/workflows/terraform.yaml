@@ -32,6 +32,9 @@ jobs:
         working-directory: ${{ matrix.terraform-environments }}
         # Don't initialize the backend because we may not have any remote backend configuration available
         run: terraform init -backend=false -input=false
+      - name: Terraform providers
+        working-directory: ${{ matrix.terraform-environments }}
+        run: terraform providers
       - name: Terraform validate
         working-directory: ${{ matrix.terraform-environments }}
         run: terraform validate
