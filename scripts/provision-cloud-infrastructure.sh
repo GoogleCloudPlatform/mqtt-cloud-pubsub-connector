@@ -104,6 +104,8 @@ if ! check_gcloud_authentication; then
   authenticate_gcloud
 fi
 
+echo "The Terraform container image ID is set to: ${TERRAFORM_CONTAINER_IMAGE_ID}"
+
 if [ "${PROVISION_GOOGLE_CLOUD_PROJECT_AND_BUCKET}" = "true" ]; then
   echo "Provisioning the Google Cloud project..."
 
