@@ -121,6 +121,7 @@ EOF
 
   run_containerized_terraform "${TERRAFORM_INIT_ENVIRONMENT_DIR}" version
   run_containerized_terraform "${TERRAFORM_INIT_ENVIRONMENT_DIR}" init
+  run_containerized_terraform "${TERRAFORM_INIT_ENVIRONMENT_DIR}" providers
   run_containerized_terraform "${TERRAFORM_INIT_ENVIRONMENT_DIR}" validate
 
   # Don't destroy the project before destroying the resources inside the project
@@ -178,6 +179,7 @@ echo "Running ${TERRAFORM_SUBCOMMAND} in the ${TERRAFORM_ENVIRONMENT_DIR} direct
 
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" version
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" init -backend-config="$(basename "${TERRAFORM_BACKEND_CONFIGURATION_FILE_PATH}")"
+run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" providers
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" validate
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" "${TERRAFORM_SUBCOMMAND}"
 
