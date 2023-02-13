@@ -8,7 +8,21 @@ against two systems:
 
 ## Authenticate against MQTT brokers
 
-(WIP, to update after we expose authentication configuration)
+The **MQTT <-> Cloud Pub/Sub Connector** supports connecting to MQTT brokers that
+offer:
+
+- non-authenticated access (i.e. public access)
+- password-based authentication
+
+To configure the password-based authentication, you need to provide the necessary configuration
+properties as described [here](https://camel.apache.org/components/latest/paho-mqtt5-component.html).
+
+### SSL/TLS certificates to secure the connection
+
+The **MQTT <-> Cloud Pub/Sub Connector** supports securing a comminication channel using a SSL/TLS
+certificate. For more information about how to provide a certificate and configure the **MQTT <-> Cloud Pub/Sub Connector**
+to use that certificate to secure the connection to the MQT broker, refer to
+the [Apache Camel Paho MQTT 5 component documentation](https://camel.apache.org/components/latest/paho-mqtt5-component.html).
 
 ## Authenticate against Cloud Pub/Sub
 
