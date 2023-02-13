@@ -21,7 +21,7 @@ properties as described [here](https://camel.apache.org/components/latest/paho-m
 
 The **MQTT <-> Cloud Pub/Sub Connector** supports securing a comminication channel using a SSL/TLS
 certificate. For more information about how to provide a certificate and configure the **MQTT <-> Cloud Pub/Sub Connector**
-to use that certificate to secure the connection to the MQT broker, refer to
+to use that certificate to secure the connection to the MQTT broker, refer to
 the [Apache Camel Paho MQTT 5 component documentation](https://camel.apache.org/components/latest/paho-mqtt5-component.html).
 
 ## Authenticate against Cloud Pub/Sub
