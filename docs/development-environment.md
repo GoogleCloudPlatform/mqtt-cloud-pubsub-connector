@@ -49,7 +49,7 @@ To run tests from Visual Studio Code:
 2. Open the `Java Projects` panel or open the JUnit test file from `src/test/java`.
 3. Click on the _play_ icon near the test or the test suite that you want to run.
 
-### Run the full test suite from the command-line
+### Build the project and run the test suite from the command-line
 
 To run tests from the command-line, do the following:
 
@@ -90,20 +90,6 @@ All the linters have their configuration stored in the `config/lint` directory.
 Additionally, some linters shipped within `super-linter` also take the
 [EditorConfig configuration file](../.editorconfig) into account.
 
-## Details about the command-line build process
+## Details about the build process
 
-To build this project from the command-line, we use the same dev container that
-we designed to build the project from inside VS Code. The build process does the
-following:
-
-1. Run a dev container instance to build the process.
-2. Run the project build process inside the dev container.
-3. The project build process:
-    1. Runs code linters.
-    2. Builds all the project assets.
-    3. Runs the unit tests suite.
-    4. Runs the containers that the integration tests suite needs.
-    5. Runs the integration tests suite.
-    6. Finalizes the project build by packaging project assets.
-
-All these container management tools share the same container runtime environment.
+For more information about the build process, refer to [Build and release processes](./build-release-processes.md)

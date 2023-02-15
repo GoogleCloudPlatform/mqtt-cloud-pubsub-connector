@@ -5,14 +5,14 @@ In this document, we describe the design of the **MQTT <-> Cloud Pub/Sub connect
 We decided to name this project a connector rather than a message broker to emphasize its generic nature for something
 that connects MQTT brokers and Cloud Pub/Sub, and acts as a thin translation layer.
 
-## Expected deliverables
+## Deliverables
 
 - Source code of all the software components and related release artifacts, hosted in
   publicly accessible repositories (this code repository).
 - [Infrastructure-as-code descriptors to provision the cloud resources for a testing and validation environment](../README.md#provision-a-test-and-validation-runtime-environment-on-google-cloud).
 - [Comprehensive, automated test suites](./development-environment.md).
-- Documentation about the design (this document), [testing](./development-environment.md),
-  how to use ([authentication guide](./authentication.md), [configuration guide](./configuration.md)), and
+- Documentation about the design (this document), how to setup a [development environment](./development-environment.md),
+  how to ([authenticate the Connector](./authentication.md), how to [configure the Connector](./configuration.md)), and
   [how to contribute](../CONTRIBUTING.md) to each component.
 - [Documentation about release and maintenance processes](./build-release-processes.md).
 
