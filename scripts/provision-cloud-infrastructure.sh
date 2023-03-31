@@ -119,6 +119,9 @@ organization_id                        = "<google cloud organization id>"
 terraform_state_production_bucket_name = "terraform-state"
 EOF
     echo "For more information about each variable, refer to their descriptions in terraform-init/variables.tf."
+    # Ignoring because those are defined in common.sh, and don't need quotes
+    # shellcheck disable=SC2086
+    exit ${ERR_MISSING_CONFIGURATION_FILE}
   fi
 
   run_containerized_terraform "${TERRAFORM_INIT_ENVIRONMENT_DIR}" version
