@@ -26,6 +26,6 @@ jobs:
       - name: Approve the PR
         run: gh pr review --approve "${PR_URL}"
       - name: Enable auto-merge for patch updates PR
-        if: {{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+        if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
         run: gh pr merge --auto --squash --delete-branch "${PR_URL}"
 ...
