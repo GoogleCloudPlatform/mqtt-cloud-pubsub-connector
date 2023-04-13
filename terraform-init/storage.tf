@@ -17,11 +17,12 @@ module "terraform_backend_gcs_buckets" {
   source  = "terraform-google-modules/cloud-storage/google"
   version = "4.0.0"
 
-  location         = var.terraform_state_production_bucket_location
-  names            = [var.terraform_state_production_bucket_name]
-  prefix           = module.project-factory.project_id
-  project_id       = module.project-factory.project_id
-  randomize_suffix = true
+  location                 = var.terraform_state_production_bucket_location
+  names                    = [var.terraform_state_production_bucket_name]
+  prefix                   = module.project-factory.project_id
+  project_id               = module.project-factory.project_id
+  public_access_prevention = true
+  randomize_suffix         = true
 
   force_destroy = {
     (var.terraform_state_production_bucket_name) = true
