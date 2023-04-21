@@ -98,18 +98,18 @@ fi
 
 echo "The Terraform container image ID is set to: ${TERRAFORM_CONTAINER_IMAGE_ID}"
 
-if [ ! -f "${TERRAFORM_VARIABLES_FILE_PATH}" ]; then
-  echo "[ERROR] ${TERRAFORM_VARIABLES_FILE_PATH} not found."
-  echo "Create ${TERRAFORM_VARIABLES_FILE_PATH} to define the required variables."
+# if [ ! -f "${TERRAFORM_VARIABLES_FILE_PATH}" ]; then
+#   echo "[ERROR] ${TERRAFORM_VARIABLES_FILE_PATH} not found."
+#   echo "Create ${TERRAFORM_VARIABLES_FILE_PATH} to define the required variables."
 
-  echo "For more information about each variable, refer to their descriptions in terraform/variables.tf."
-  # Ignoring because those are defined in common.sh, and don't need quotes
-  # shellcheck disable=SC2086
-  exit ${ERR_MISSING_CONFIGURATION_FILE}
-fi
+#   echo "For more information about each variable, refer to their descriptions in terraform/variables.tf."
+#   # Ignoring because those are defined in common.sh, and don't need quotes
+#   # shellcheck disable=SC2086
+#   exit ${ERR_MISSING_CONFIGURATION_FILE}
+# fi
 
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" version
-run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" init -migrate-backend
+run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" init -migrate-state
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" providers
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" validate
 run_containerized_terraform "${TERRAFORM_ENVIRONMENT_DIR}" "${TERRAFORM_SUBCOMMAND}"

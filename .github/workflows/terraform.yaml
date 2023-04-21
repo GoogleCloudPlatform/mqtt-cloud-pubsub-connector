@@ -31,7 +31,7 @@ jobs:
       - name: Terraform init
         working-directory: ${{ matrix.terraform-environments }}
         # Don't initialize the backend because we may not have any remote backend configuration available
-        run: terraform init -backend=false -input=false
+        run: terraform init -input=false
       - name: Terraform validate
         working-directory: ${{ matrix.terraform-environments }}
         run: terraform validate
@@ -39,5 +39,4 @@ jobs:
       matrix:
         terraform-environments:
           - terraform
-          - terraform-init
 ...
