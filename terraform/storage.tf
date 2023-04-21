@@ -19,8 +19,8 @@ module "terraform_backend_gcs_buckets" {
 
   location                 = var.terraform_state_production_bucket_location
   names                    = [var.terraform_state_production_bucket_name]
-  prefix                   = module.project-factory.project_id
-  project_id               = module.project-factory.project_id
+  prefix                   = data.google_project.default_project
+  project_id               = data.google_project.default_project
   public_access_prevention = true
   randomize_suffix         = true
 
