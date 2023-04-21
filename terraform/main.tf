@@ -13,11 +13,17 @@
 # limitations under the License.
 
 data "google_project" "default_project" {
-  project_id = var.google_default_project_id
+  project_id = var.google_project_id
 }
 
 provider "google" {
-  project = var.google_default_project_id
+  project = var.google_project_id
+  region  = var.google_default_region
+  zone    = var.google_default_zone
+}
+
+provider "google-beta" {
+  project = var.google_project_id
   region  = var.google_default_region
   zone    = var.google_default_zone
 }

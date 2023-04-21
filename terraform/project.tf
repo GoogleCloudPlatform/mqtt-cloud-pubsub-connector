@@ -13,6 +13,8 @@
 # limitations under the License.
 
 module "project-factory" {
+  count = var.create_google_cloud_project ? 1 : 0
+
   source  = "terraform-google-modules/project-factory/google"
   version = "14.2.0"
 
