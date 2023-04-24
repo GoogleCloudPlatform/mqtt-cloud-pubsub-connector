@@ -15,14 +15,6 @@ To provision a test and validation runtime environment on Google Cloud, you need
 To provision the resources for the testing and validation runtime environment, do the following:
 
 1. Change your working directory to the root directory of this repository.
-1. Provision the environment on Google Cloud by following either the [Provision the environment in a Google Cloud project](#provision-the-environment-in-a-google-cloud-project)
-    section.
-
-## Provision the environment in a Google Cloud project
-
-To provision all the Google Cloud resources for the testing and validation runtime environment, including a Google Cloud
-project to create those resources into, and a Cloud Storage bucket to store Terraform backend data, do the following:
-
 1. Run the cloud resources provisioning script:
 
     ```sh
@@ -31,7 +23,7 @@ project to create those resources into, and a Cloud Storage bucket to store Terr
 
     The script guides you in providing the necessary configuration data.
 
-### Necessary permissions to provision the environment in a new project
+## Necessary permissions to provision the environment in a new project
 
 To provision the environment in a new project, you need to authenticate against
 Google Cloud using an account that has the necessary permissions in your Google
@@ -43,7 +35,7 @@ permissions, refer to:
 - [Creating a Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets)
 - The permissions listed [in the next section](#necessary-permissions-to-provision-the-environment-in-an-existing-project)
 
-### Necessary permissions to provision the environment in an existing project
+## Necessary permissions to provision the environment in an existing project
 
 To provision the environment in an existing project, you need to authenticate
 against Google Cloud using an account that has the necessary permissions in your
