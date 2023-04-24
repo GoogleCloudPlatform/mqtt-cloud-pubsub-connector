@@ -75,6 +75,7 @@ variable "terraform_state_production_bucket_location" {
 }
 
 variable "terraform_state_production_bucket_name" {
+  default     = "terraform-state"
   description = "Name of the Google Cloud Storage bucket to store the production Terraform state."
   type        = string
 }
