@@ -21,7 +21,6 @@ module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-private-cluster"
   version = "26.0.0"
 
-  datapath_provider               = "ADVANCED_DATAPATH"
   deploy_using_private_endpoint   = true
   description                     = "GKE Cluster to deploy the MQTT <-> Cloud Pub/Sub connector"
   enable_cost_allocation          = true
