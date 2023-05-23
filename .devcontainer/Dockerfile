@@ -16,14 +16,12 @@ COPY --from=terraform /bin/terraform /usr/bin/
 
 SHELL ["/bin/bash", "-o", "pipefail", "-o", "errexit", "-c"]
 
-RUN apt-get update \
-    && apt-get install --no-install-recommends --yes \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    && mkdir -p /etc/apt/keyrings \
-    && curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list \
+ENV KUBERNETES_APT_REPOSITORY_KEY_PATH="/etc/apt/keyrings/kubernetes-archive-keyring.gpg"
+
+RUN mkdir -p "$(dirname "${KUBERNETES_APT_REPOSITORY_KEY_PATH}")" \
+    && curl -fsSLo "${KUBERNETES_APT_REPOSITORY_KEY_PATH}" https://dl.k8s.io/apt/doc/apt-key.gpg \
+    && chmod 0644 "${KUBERNETES_APT_REPOSITORY_KEY_PATH}" \
+    && echo "deb [signed-by="${KUBERNETES_APT_REPOSITORY_KEY_PATH}"] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list \
     && apt-get update \
     && apt-get install --no-install-recommends --yes kubectl \
     && rm -rf /var/lib/apt/lists/* \
