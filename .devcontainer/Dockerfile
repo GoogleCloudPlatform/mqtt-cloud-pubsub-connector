@@ -21,7 +21,7 @@ ENV KUBERNETES_APT_REPOSITORY_KEY_PATH="/etc/apt/keyrings/kubernetes-archive-key
 RUN mkdir -p "$(dirname "${KUBERNETES_APT_REPOSITORY_KEY_PATH}")" \
     && curl -fsSLo "${KUBERNETES_APT_REPOSITORY_KEY_PATH}" https://dl.k8s.io/apt/doc/apt-key.gpg \
     && chmod 0644 "${KUBERNETES_APT_REPOSITORY_KEY_PATH}" \
-    && echo "deb [signed-by="${KUBERNETES_APT_REPOSITORY_KEY_PATH}"] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list \
+    && echo "deb [signed-by=${KUBERNETES_APT_REPOSITORY_KEY_PATH}] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list \
     && apt-get update \
     && apt-get install --no-install-recommends --yes kubectl \
     && rm -rf /var/lib/apt/lists/* \
