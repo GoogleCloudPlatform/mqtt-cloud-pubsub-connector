@@ -1,4 +1,4 @@
-FROM gcr.io/google.com/cloudsdktool/google-cloud-cli:433.0.1
+FROM gcr.io/google.com/cloudsdktool/google-cloud-cli:434.0.0
 
 WORKDIR "/"
 COPY container-images/gcloud-sdk/requirements.txt requirements.txt
