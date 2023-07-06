@@ -22,22 +22,22 @@ provider "registry.terraform.io/hashicorp/external" {
 }
 
 provider "registry.terraform.io/hashicorp/google" {
-  version     = "4.72.0"
-  constraints = ">= 3.33.0, >= 3.39.0, >= 3.43.0, >= 3.45.0, >= 3.53.0, >= 3.83.0, >= 4.25.0, >= 4.32.0, >= 4.51.0, != 4.65.0, != 4.65.1, 4.72.0, < 5.0.0"
+  version     = "4.72.1"
+  constraints = ">= 3.33.0, >= 3.39.0, >= 3.43.0, >= 3.45.0, >= 3.53.0, >= 3.83.0, >= 4.25.0, >= 4.32.0, >= 4.51.0, != 4.65.0, != 4.65.1, 4.72.1, < 5.0.0"
   hashes = [
-    "h1:03tgqyT7qvJVGb6Lv23QFC+XZwrbRoBxQ7qNNpYgm5Y=",
-    "zh:0e12fc23ec88df4039f2edda0fd37ca170c0f74c01370430a5327d13a54cf06d",
-    "zh:0e78dfad7be1c7fb2d65590be258aac6c3bf29a86c5f68ab06526a242b5ac119",
-    "zh:55965e79ba41688aadf0f6c5011cabeec87ed4be8bd9f2379398ff5fc09a9bcc",
-    "zh:5e5ffb629b9471e84be34b11685bfd16c3f80aee3179b06bc97b23617380a641",
-    "zh:5f300bfbf3475555362bb3e358360ae10b6ffe7d7360c94964e6b2e420a922e6",
-    "zh:9a911fc34d0b6ac35e78242a990e9864061a4d28967705688bfbc75933a8887f",
-    "zh:9c665d90f1e7dbc163fd28222fc04d6ff941cd1b01997e474dc1d4e03351732d",
-    "zh:a8f1607a38586ee1dd41f89f53afd27997037e1f888d844d8585966bb9981ec6",
-    "zh:c93c118cd457e21ad9d7af003fe94eb76e757143c3a198e013fc530368755506",
-    "zh:cc27227e4db680a521862bd61e34ed433b8c4b27b53c87bdead62ff09b27f155",
-    "zh:d46d25b4c51846ee8276f6d6094c14a6c39a51c57a98534b372486e8e89b1147",
+    "h1:QYGHDARL8kbo07OpmdVzWhpoHaBy+rleGfkRjzXMEEk=",
+    "zh:060f6fd48b12896f7bc20479ee5f5d48ceb5e7efab05f33351af6f24f0f3f533",
+    "zh:4cbf6b7600d204a37952d0301e410f5aec637362f16a66352be3da89f635beee",
+    "zh:51ab7da7437b7c3efe02656d97d1df7804edf5ec4539f8c44279e27a0f013acc",
+    "zh:79810c32e062bd1bdf453610b09f8ef2a1372d3fc6412217cf7c1ad5bd6ba0b9",
+    "zh:826baa69af70da955db60e3a6dd8021ce84457bbd923d6f71d2f15ff5bdd93eb",
+    "zh:907d3168ead72746cbcdaad2eec991e3c1257b60914ae8383179b35cdcb55c83",
+    "zh:c2d36c8ad63a30824c1c7364cb050a181982a912df3c6a8486d72321e9c84dba",
+    "zh:d3915c2abea0aa3b8a30b1320eb814d9814ff51def19f38dd0187001e472dc0e",
+    "zh:d5713d05542efad7d59299ee0b3e9ba307447a625254d04025d18358310112d4",
     "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
+    "zh:f6888827fd068f7769ad09eba83ff03d3054ff81976b414b6602ef878abad5a5",
+    "zh:f9ef62a5c621e4b8809b3bd6779f07f3b65989334374c2f23f8bfd62dca9b481",
   ]
 }
 
