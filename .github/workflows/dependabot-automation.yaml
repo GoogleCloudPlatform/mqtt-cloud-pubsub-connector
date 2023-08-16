@@ -17,7 +17,7 @@ jobs:
       PR_URL: ${{github.event.pull_request.html_url}}
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     runs-on: ubuntu-latest
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    if: github.actor == 'dependabot[bot]'
     steps:
       - name: Fetch Dependabot metadata
         id: metadata
@@ -27,6 +27,19 @@ jobs:
       - name: Approve the PR
         run: gh pr review --approve "${PR_URL}"
       - name: Enable auto-merge for patch updates PR
-        if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+        if: >
+          steps.metadata.outputs.update-type == 'version-update:semver-patch'
+          || steps.metadata.outputs.dependency-names == 'com.diffplug.spotless'
+          || steps.metadata.outputs.dependency-names == 'docker/metadata-action'
+          || steps.metadata.outputs.dependency-names == 'google.com/cloudsdktool/google-cloud-cli'
+          || steps.metadata.outputs.dependency-names == 'hashicorp/google-beta'
+          || steps.metadata.outputs.dependency-names == 'hashicorp/google'
+          || steps.metadata.outputs.dependency-names == 'hashicorp/terraform'
+          || steps.metadata.outputs.dependency-names == 'numpy'
+          || steps.metadata.outputs.dependency-names == 'terraform-google-modules/cloud-router/google'
+          || steps.metadata.outputs.dependency-names == 'terraform-google-modules/cloud-storage/google'
+          || steps.metadata.outputs.dependency-names == 'terraform-google-modules/kubernetes-engine/google'
+          || steps.metadata.outputs.dependency-names == 'terraform-google-modules/network/google'
+          || steps.metadata.outputs.dependency-names == 'terraform-google-modules/project-factory/google'
         run: gh pr merge --auto --squash --delete-branch "${PR_URL}"
 ...
