@@ -34,7 +34,7 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5.0.0
@@ -76,7 +76,7 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Build the MQTT <-> Cloud Pub/Sub Connector container image
         run: scripts/build.sh
 ...
