@@ -14,10 +14,14 @@
 
 package com.google.cloud.solutions.routes;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.google.pubsub.GooglePubsubConstants;
+import org.apache.camel.component.paho.mqtt5.PahoMqtt5Constants;
 import org.apache.camel.spi.SupervisingRouteController;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
@@ -37,6 +41,8 @@ public class MqttToCloudPubSubRoute extends RouteBuilder {
   public static final String MQTT_CLIENT_ID_PREFIX = "camel-paho-";
   public static final String MQTT_CLIENT_ID_FROM_SOURCE_TOPIC_PREFIX = "from-source-topic-";
   public static final String MQTT_TO_CLOUD_PUB_SUB_ROUTE_ID_PREFIX = "mqtt-to-cloud-pubsub-route-";
+
+  public static final String SOURCE_MQTT_TOPIC_HEADER_NAME = "source-mqtt-topic-name";
 
   @ConfigProperty(name = CLOUD_PUB_SUB_PROJECT_ID_PROPERTY_KEY)
   @Inject
@@ -82,7 +88,17 @@ public class MqttToCloudPubSubRoute extends RouteBuilder {
     LOG.infof("Apache Camel route start: %s", routeStart);
     LOG.infof("Apache Camel route destination: %s", routeDestination);
 
-    from(routeStart).id(mqttToCloudPubSubRouteId).to(routeDestination);
+    from(routeStart)
+        .id(mqttToCloudPubSubRouteId)
+        .process(
+            exchange -> {
+              String mqttTopic =
+                  exchange.getIn().getHeader(PahoMqtt5Constants.MQTT_TOPIC, String.class);
+              Map<String, String> headers = new HashMap<>();
+              headers.put(SOURCE_MQTT_TOPIC_HEADER_NAME, mqttTopic);
+              exchange.getIn().setHeader(GooglePubsubConstants.ATTRIBUTES, headers);
+            })
+        .to(routeDestination);
   }
 
   public String getFromSourceTopicMqttClientId() {

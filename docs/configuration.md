@@ -75,6 +75,13 @@ By setting it a wildcard MQTT subscription, you can forward MQTT messages sent t
 that match with the wildcard subscription to the Cloud Pub/Sub topic that you configured with the
 `<destination-cloud-pubsub-topic>` option, as described above.
 
+### Source MQTT topic
+
+The `<source-mqtt-topic>` name is added as a header to Cloud Pub/Sub messages.
+The key of this header is defined in the
+`com.google.cloud.solutions.routesMqttToCloudPubSubRoute.SOURCE_MQTT_TOPIC_HEADER_NAME`
+constant.
+
 ## Other configuration options
 
 Part of the MQTT <-> Cloud Pub/Sub Connector uses Apache Camel, but not all Apache Camel

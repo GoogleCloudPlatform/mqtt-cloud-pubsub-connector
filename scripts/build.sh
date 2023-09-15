@@ -98,7 +98,7 @@ if ! is_ci; then
     _DOCKER_INTERACTIVE_TTY_OPTION="-it"
   fi
 
-  LINTER_CONTAINER_IMAGE="ghcr.io/github/super-linter:${LINTER_CONTAINER_IMAGE_VERSION:-"latest"}"
+  LINTER_CONTAINER_IMAGE="ghcr.io/super-linter/super-linter:${LINTER_CONTAINER_IMAGE_VERSION:-"latest"}"
 
   if [ "${UPDATE_CONTAINER_IMAGE:-}" = "true" ]; then
     docker pull "${LINTER_CONTAINER_IMAGE}"
