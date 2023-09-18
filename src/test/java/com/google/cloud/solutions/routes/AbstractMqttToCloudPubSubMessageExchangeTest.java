@@ -21,6 +21,7 @@ import com.google.cloud.solutions.resources.CloudPubSubResource;
 import com.google.cloud.solutions.resources.InjectCloudPubSubContainer;
 import com.google.cloud.solutions.resources.InjectMqttBrokerContainer;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.component.google.pubsub.GooglePubsubConstants;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import org.junit.jupiter.api.Test;
@@ -230,6 +232,11 @@ public abstract class AbstractMqttToCloudPubSubMessageExchangeTest {
       assertThat(exchange).isNotNull();
       Message receivedMessage = exchange.getMessage();
       String receivedMessageBody = receivedMessage.getBody(String.class);
+      @SuppressWarnings("unchecked")
+      Map<String, String> receivedMessageBodyHeaders =
+          receivedMessage.getHeader(GooglePubsubConstants.ATTRIBUTES, Map.class);
+      String mqttMessageTopicHeader =
+          receivedMessageBodyHeaders.get(MqttToCloudPubSubRoute.SOURCE_MQTT_TOPIC_HEADER_NAME);
       consumerTemplate.doneUoW(exchange);
 
       // Check that the test MQTT client published a message in the MQTT topic we
@@ -238,8 +245,10 @@ public abstract class AbstractMqttToCloudPubSubMessageExchangeTest {
           mqttBrokerContainer.getLogs(), testMqttClientId, processedMqttTopic);
 
       String expectedMessageBody = messageBodyPrefix + processedMqttTopic;
+      String expectedMqttMessageTopicHeader = processedMqttTopic;
       // Ensure that what we received is what we expect
-      assertThat(expectedMessageBody).isEqualTo(receivedMessageBody);
+      assertThat(receivedMessageBody).isEqualTo(expectedMessageBody);
+      assertThat(mqttMessageTopicHeader).isEqualTo(expectedMqttMessageTopicHeader);
     }
 
     // Stop the consumer template because we don't need to receive any new messages
