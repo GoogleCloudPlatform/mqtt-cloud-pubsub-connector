@@ -1,6 +1,6 @@
 FROM hashicorp/terraform:1.6.1 as terraform
 
-FROM mcr.microsoft.com/vscode/devcontainers/java:17-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/java:21-bullseye
 
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
