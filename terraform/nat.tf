@@ -17,7 +17,7 @@
 # https://registry.terraform.io/modules/terraform-google-modules/cloud-router/google
 module "cloud_router" {
   source  = "terraform-google-modules/cloud-router/google"
-  version = "6.0.1"
+  version = "6.0.2"
 
   name    = "master-authorized-network-router"
   network = module.gcp_network.network_name
