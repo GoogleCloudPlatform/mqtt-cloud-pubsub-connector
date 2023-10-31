@@ -38,6 +38,7 @@ jobs:
           || steps.metadata.outputs.dependency-names == 'google.com/cloudsdktool/google-cloud-cli'
           || steps.metadata.outputs.dependency-names == 'hashicorp/google-beta'
           || steps.metadata.outputs.dependency-names == 'hashicorp/google'
+          || steps.metadata.outputs.dependency-names == 'hashicorp/setup-terraform'
           || steps.metadata.outputs.dependency-names == 'hashicorp/terraform'
           || steps.metadata.outputs.dependency-names == 'numpy'
           || steps.metadata.outputs.dependency-names == 'super-linter/super-linter'
