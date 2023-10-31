@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
       - name: Terraform init
         working-directory: ${{ matrix.terraform-environments }}
         # Don't initialize the backend because we may not have any remote backend configuration available
