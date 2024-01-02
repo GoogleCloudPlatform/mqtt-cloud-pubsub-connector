@@ -15,7 +15,7 @@
 plugins {
   id 'java'
   id 'com.diffplug.spotless' version '6.23.3'
-  id 'io.quarkus'
+  id "io.quarkus" version "2.10.3.Final"
 }
 
 repositories {
@@ -24,8 +24,8 @@ repositories {
 }
 
 dependencies {
-  implementation enforcedPlatform("${quarkusPlatformGroupId}:quarkus-camel-bom:${quarkusPlatformVersion}")
-  implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+  implementation enforcedPlatform("io.quarkus.platform:quarkus-camel-bom:2.10.3.Final")
+  implementation enforcedPlatform("io.quarkus.platform:quarkus-bom:2.10.3.Final")
 
   implementation 'io.quarkus:quarkus-arc'
   implementation 'io.quarkus:quarkus-container-image-docker'
@@ -44,8 +44,8 @@ group 'com.google.cloud.solutions'
 version '1.0.0-SNAPSHOT'
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
-  targetCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
 }
 
 compileJava {
@@ -64,7 +64,7 @@ test {
 spotless {
   java {
     target "**/*.java"
-    googleJavaFormat('1.15.0')
+    googleJavaFormat('1.19.1')
     formatAnnotations()
     removeUnusedImports()
     importOrder()
