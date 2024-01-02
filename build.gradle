@@ -24,8 +24,8 @@ repositories {
 }
 
 dependencies {
-  implementation enforcedPlatform("${quarkusPlatformGroupId}:quarkus-camel-bom:${quarkusPlatformVersion}")
-  implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+  implementation enforcedPlatform("io.quarkus.platform:quarkus-camel-bom:2.10.3.Final")
+  implementation enforcedPlatform("io.quarkus.platform:quarkus-bom:2.10.3.Final")
 
   implementation 'io.quarkus:quarkus-arc'
   implementation 'io.quarkus:quarkus-container-image-docker'
@@ -85,4 +85,15 @@ spotless {
       " */\n" +
       "\n"
   }
+}
+
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        mavenLocal()
+    }
+    plugins {
+        id "io.quarkus" version "2.10.3.Final"
+    }
 }
