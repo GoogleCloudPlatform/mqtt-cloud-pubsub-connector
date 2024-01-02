@@ -41,6 +41,7 @@ jobs:
           || steps.metadata.outputs.dependency-names == 'hashicorp/setup-terraform'
           || steps.metadata.outputs.dependency-names == 'hashicorp/terraform'
           || steps.metadata.outputs.dependency-names == 'numpy'
+          || steps.metadata.outputs.dependency-names == 'org.assertj:assertj-core'
           || steps.metadata.outputs.dependency-names == 'super-linter/super-linter'
           || steps.metadata.outputs.dependency-names == 'terraform-google-modules/cloud-router/google'
           || steps.metadata.outputs.dependency-names == 'terraform-google-modules/cloud-storage/google'
