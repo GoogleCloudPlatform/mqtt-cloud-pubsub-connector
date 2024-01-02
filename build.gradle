@@ -64,7 +64,7 @@ test {
 spotless {
   java {
     target "**/*.java"
-    googleJavaFormat('1.15.0')
+    googleJavaFormat('1.19.1')
     formatAnnotations()
     removeUnusedImports()
     importOrder()
