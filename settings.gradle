@@ -12,4 +12,12 @@
  * the License.
  */
 
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        mavenLocal()
+    }
+}
+
 rootProject.name='mqtt-cloud-pubsub-connector'
