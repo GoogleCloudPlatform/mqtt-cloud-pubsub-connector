@@ -20,4 +20,4 @@ pluginManagement {
     }
 }
 
-rootProject.name='mqtt-cloud-pubsub-connector'
+rootProject.name = 'mqtt-cloud-pubsub-connector'

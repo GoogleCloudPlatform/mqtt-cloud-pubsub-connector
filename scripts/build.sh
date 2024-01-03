@@ -137,7 +137,7 @@ if [ "${FIX_LINTING_ERRORS}" = "true" ]; then
 fi
 
 echo "Running the dev container to build the project: ${DEVCONTAINER_IMAGE_FULL_ID}"
-run_devcontainer ./gradlew --info --no-daemon clean build
+run_devcontainer ./gradlew --info --no-daemon --warning-mode all clean build
 
 echo "Building the project container image: ${MQTT_CLOUD_PUBSUB_CONNECTOR_CONTAINER_IMAGE_FULL_ID}"
 docker build \
