@@ -33,6 +33,8 @@ dependencies {
 
   implementation 'io.quarkus:quarkus-arc'
   implementation 'io.quarkus:quarkus-container-image-docker'
+  implementation 'io.quarkus:quarkus-virtual-threads'
+  implementation 'io.quarkus:quarkus-vertx'
   implementation 'org.apache.camel.quarkus:camel-quarkus-google-pubsub'
   implementation 'org.apache.camel.quarkus:camel-quarkus-paho-mqtt5'
   implementation 'org.jboss.slf4j:slf4j-jboss-logmanager'
