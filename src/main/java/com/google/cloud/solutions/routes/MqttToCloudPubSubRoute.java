@@ -14,11 +14,11 @@
 
 package com.google.cloud.solutions.routes;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.google.pubsub.GooglePubsubConstants;
 import org.apache.camel.component.paho.mqtt5.PahoMqtt5Constants;
