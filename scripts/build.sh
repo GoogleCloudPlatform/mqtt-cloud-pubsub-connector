@@ -115,7 +115,6 @@ if ! is_ci; then
     --rm \
     --volume "$(pwd)":/tmp/lint \
     --volume /etc/localtime:/etc/localtime:ro \
-    --workdir /tmp/lint \
     "${LINTER_CONTAINER_IMAGE}" \
     "$@"
 
