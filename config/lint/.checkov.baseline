@@ -12,17 +12,6 @@
             ]
         },
         {
-            "file": "/.github/workflows/lint.yaml",
-            "findings": [
-                {
-                    "resource": "on(Lint)",
-                    "check_ids": [
-                        "CKV2_GHA_1"
-                    ]
-                }
-            ]
-        },
-        {
             "file": "/.github/workflows/terraform.yaml",
             "findings": [
                 {

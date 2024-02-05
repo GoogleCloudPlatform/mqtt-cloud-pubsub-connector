@@ -5,8 +5,6 @@
 # as we ship Checkov with super-linter.
 baseline: config/lint/.checkov.baseline
 
-download-external-modules: true
-
 # Report skipped baseline checks in the output
 output-baseline-as-skipped: true
 

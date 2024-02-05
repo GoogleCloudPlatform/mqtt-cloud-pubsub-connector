@@ -19,6 +19,12 @@ on:  # yamllint disable-line rule:truthy
   push: null
   pull_request: null
 
+permissions:
+  contents: read
+  packages: read
+  # To report GitHub Actions status checks
+  statuses: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
