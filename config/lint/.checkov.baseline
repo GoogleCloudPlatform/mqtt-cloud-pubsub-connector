@@ -1,0 +1,308 @@
+{
+    "failed_checks": [
+        {
+            "file": "/.github/workflows/build-container-images.yaml",
+            "findings": [
+                {
+                    "resource": "on(Build container images)",
+                    "check_ids": [
+                        "CKV2_GHA_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/.github/workflows/lint.yaml",
+            "findings": [
+                {
+                    "resource": "on(Lint)",
+                    "check_ids": [
+                        "CKV2_GHA_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/.github/workflows/terraform.yaml",
+            "findings": [
+                {
+                    "resource": "on(Terraform)",
+                    "check_ids": [
+                        "CKV2_GHA_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/Dockerfile",
+            "findings": [
+                {
+                    "resource": "/Dockerfile.",
+                    "check_ids": [
+                        "CKV_DOCKER_2"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/container-images/gcloud-sdk/Dockerfile",
+            "findings": [
+                {
+                    "resource": "/container-images/gcloud-sdk/Dockerfile.",
+                    "check_ids": [
+                        "CKV_DOCKER_2",
+                        "CKV_DOCKER_3"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/emqtt-bench/.github/workflows/build.yaml",
+            "findings": [
+                {
+                    "resource": "on(build)",
+                    "check_ids": [
+                        "CKV2_GHA_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/emqtt-bench/Dockerfile",
+            "findings": [
+                {
+                    "resource": "/emqtt-bench/Dockerfile.",
+                    "check_ids": [
+                        "CKV_DOCKER_2",
+                        "CKV_DOCKER_3"
+                    ]
+                },
+                {
+                    "resource": "/emqtt-bench/Dockerfile.FROM",
+                    "check_ids": [
+                        "CKV_DOCKER_7"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/kubernetes/mosquitto/mosquitto.yaml",
+            "findings": [
+                {
+                    "resource": "Deployment.default.mosquitto",
+                    "check_ids": [
+                        "CKV_K8S_14",
+                        "CKV_K8S_20",
+                        "CKV_K8S_21",
+                        "CKV_K8S_22",
+                        "CKV_K8S_23",
+                        "CKV_K8S_28",
+                        "CKV_K8S_29",
+                        "CKV_K8S_30",
+                        "CKV_K8S_31",
+                        "CKV_K8S_37",
+                        "CKV_K8S_38",
+                        "CKV_K8S_40",
+                        "CKV_K8S_43"
+                    ]
+                },
+                {
+                    "resource": "Pod.default.mosquitto.app-mosquitto",
+                    "check_ids": [
+                        "CKV2_K8S_6"
+                    ]
+                },
+                {
+                    "resource": "Service.default.mosquitto",
+                    "check_ids": [
+                        "CKV_K8S_21"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/kubernetes/mqtt-benchmarker/emqtt-bench.yaml",
+            "findings": [
+                {
+                    "resource": "Deployment.default.emqtt-bench",
+                    "check_ids": [
+                        "CKV_K8S_14",
+                        "CKV_K8S_20",
+                        "CKV_K8S_21",
+                        "CKV_K8S_22",
+                        "CKV_K8S_23",
+                        "CKV_K8S_28",
+                        "CKV_K8S_29",
+                        "CKV_K8S_30",
+                        "CKV_K8S_31",
+                        "CKV_K8S_37",
+                        "CKV_K8S_38",
+                        "CKV_K8S_40",
+                        "CKV_K8S_43",
+                        "CKV_K8S_8",
+                        "CKV_K8S_9"
+                    ]
+                },
+                {
+                    "resource": "Pod.default.emqtt-bench.app-emqtt-bench",
+                    "check_ids": [
+                        "CKV2_K8S_6"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/kubernetes/mqtt-cloud-pubsub-connector/mqtt-cloud-pubsub-connector-workload-identity-annotation-patch.yaml",
+            "findings": [
+                {
+                    "resource": "ServiceAccount.default.mqtt-cloud-pubsub-connector",
+                    "check_ids": [
+                        "CKV_K8S_21"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/kubernetes/mqtt-cloud-pubsub-connector/mqtt-cloud-pubsub-connector.yaml",
+            "findings": [
+                {
+                    "resource": "Deployment.default.mqtt-cloud-pubsub-connector",
+                    "check_ids": [
+                        "CKV_K8S_14",
+                        "CKV_K8S_20",
+                        "CKV_K8S_21",
+                        "CKV_K8S_22",
+                        "CKV_K8S_23",
+                        "CKV_K8S_28",
+                        "CKV_K8S_29",
+                        "CKV_K8S_30",
+                        "CKV_K8S_31",
+                        "CKV_K8S_37",
+                        "CKV_K8S_38",
+                        "CKV_K8S_40",
+                        "CKV_K8S_43",
+                        "CKV_K8S_8",
+                        "CKV_K8S_9"
+                    ]
+                },
+                {
+                    "resource": "Pod.default.mqtt-cloud-pubsub-connector.app-mqtt-cloud-pubsub-connector",
+                    "check_ids": [
+                        "CKV2_K8S_6"
+                    ]
+                },
+                {
+                    "resource": "ServiceAccount.default.mqtt-cloud-pubsub-connector",
+                    "check_ids": [
+                        "CKV_K8S_21"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform-init/project.tf",
+            "findings": [
+                {
+                    "resource": "project-factory",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform-init/storage.tf",
+            "findings": [
+                {
+                    "resource": "terraform_backend_gcs_buckets",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform/artifact-registry.tf",
+            "findings": [
+                {
+                    "resource": "google_artifact_registry_repository.mqtt_cloud_pubsub_container_image_repository",
+                    "check_ids": [
+                        "CKV_GCP_84"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform/bastion-host.tf",
+            "findings": [
+                {
+                    "resource": "iap_bastion",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform/gke.tf",
+            "findings": [
+                {
+                    "resource": "gke",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                },
+                {
+                    "resource": "mqtt_cloud_pubsub_connector_workload_identity",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform/nat.tf",
+            "findings": [
+                {
+                    "resource": "cloud_router",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform/network.tf",
+            "findings": [
+                {
+                    "resource": "gcp_network",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform/pubsub.tf",
+            "findings": [
+                {
+                    "resource": "pubsub",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        },
+        {
+            "file": "/terraform/services.tf",
+            "findings": [
+                {
+                    "resource": "project-services",
+                    "check_ids": [
+                        "CKV_TF_1"
+                    ]
+                }
+            ]
+        }
+    ]
+}
