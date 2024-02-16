@@ -114,8 +114,6 @@ if ! is_ci; then
     --name "super-linter" \
     --rm \
     --volume "$(pwd)":/tmp/lint \
-    --volume /etc/localtime:/etc/localtime:ro \
-    --workdir /tmp/lint \
     "${LINTER_CONTAINER_IMAGE}" \
     "$@"
 

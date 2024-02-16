@@ -34,7 +34,7 @@ the following documents:
 ## Provision a test and validation runtime environment on Google Cloud
 
 For more information about provisioning and configuring a test and validation runtime environment
-on Google Cloud, refer to the
+on Google Cloud, see
 [Provision a test and validation runtime environment on Google Cloud document](docs/provision-deploy-google-cloud-gke.md).
 
 ## Contribute to this project

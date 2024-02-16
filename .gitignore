@@ -71,3 +71,6 @@ emqtt-bench/
 
 # Temporary files
 *.hprof
+
+# Checkov external modules directory
+.external_modules/
