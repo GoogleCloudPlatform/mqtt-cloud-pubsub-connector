@@ -21,15 +21,15 @@ on:  # yamllint disable-line rule:truthy
 
 permissions:
   contents: read
-  packages: read
-  # To report GitHub Actions status checks
-  statuses: write
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
     steps:
       - uses: actions/checkout@v4
         with:
