@@ -137,6 +137,10 @@ fi
 echo "Running the dev container to build the project: ${DEVCONTAINER_IMAGE_FULL_ID}"
 run_devcontainer ./gradlew --info --no-daemon --warning-mode all clean build
 
+# Chown to the current user because we run the devcontainer as root to access the host docker socket
+# so we can launch containers to run tests
+sudo chown -R "$(id --user)":"$(id --group)" build .gradle .gradle-user-home
+
 echo "Building the project container image: ${MQTT_CLOUD_PUBSUB_CONNECTOR_CONTAINER_IMAGE_FULL_ID}"
 docker build \
   --tag "${MQTT_CLOUD_PUBSUB_CONNECTOR_CONTAINER_IMAGE_FULL_ID}" \

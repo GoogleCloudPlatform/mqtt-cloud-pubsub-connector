@@ -242,18 +242,13 @@ run_gcloud_container_image() {
 }
 
 run_devcontainer() {
-  GRADLE_CACHE_PATH="${CURRENT_WORKING_DIRECTORY}/.gradle-cache"
-  mkdir \
-    --parent \
-    "${GRADLE_CACHE_PATH}"
-
   # shellcheck disable=SC2086
   docker run \
     ${DOCKER_FLAGS} \
     --env "JAVA_HOME=/usr/lib/jvm/msopenjdk-current" \
+    --env "GRADLE_USER_HOME=${WORKSPACE_DESTINATION_PATH}/.gradle-user-home" \
     --rm \
     --volume "${CURRENT_WORKING_DIRECTORY}":"${WORKSPACE_DESTINATION_PATH}" \
-    --volume "${GRADLE_CACHE_PATH}":"/root/.gradle" \
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --workdir "${WORKSPACE_DESTINATION_PATH}" \
     "${DEVCONTAINER_IMAGE_FULL_ID}" \

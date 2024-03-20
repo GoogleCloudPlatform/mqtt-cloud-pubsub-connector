@@ -16,7 +16,7 @@
 !build*
 !.gradle/*
 
-.gradle-cache
+.gradle-user-home
 .vscode
 emqtt-bench
 
