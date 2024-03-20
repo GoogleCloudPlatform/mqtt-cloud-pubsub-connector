@@ -15,6 +15,7 @@
 # Gradle
 .gradle/
 .gradle-cache/
+.gradle-user-home/
 build/
 
 # Eclipse
