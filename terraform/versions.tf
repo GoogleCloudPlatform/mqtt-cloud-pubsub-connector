@@ -13,6 +13,10 @@
 # limitations under the License.
 
 terraform {
+  provider_meta "google" {
+    module_name = "cloud-solutions/mqtt-cloud-pubsub-connector-deploy-v1.1.1"
+  }
+
   required_version = ">=1.3.6"
 
   required_providers {
