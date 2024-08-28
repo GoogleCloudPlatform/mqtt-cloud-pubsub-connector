@@ -1,5 +1,5 @@
 ext {
   assertjVersion = '3.26.3'
-  ioQuarkusVersion = '3.9.5'
+  ioQuarkusVersion = '3.14.1'
   spotlessVersion = '6.25.0'
 }
