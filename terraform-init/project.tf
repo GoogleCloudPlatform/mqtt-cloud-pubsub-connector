@@ -14,7 +14,7 @@
 
 module "project-factory" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "17.1.0"
+  version = "18.0.0"
 
   auto_create_network = false
   billing_account     = var.billing_account_id
