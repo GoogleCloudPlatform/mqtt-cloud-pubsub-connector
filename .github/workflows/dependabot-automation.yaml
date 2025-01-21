@@ -52,5 +52,5 @@ jobs:
           || steps.metadata.outputs.dependency-names == 'terraform-google-modules/network/google'
           || steps.metadata.outputs.dependency-names == 'terraform-google-modules/project-factory/google'
           || steps.metadata.outputs.dependency-names == 'vscode/devcontainers/java'
-        run: gh pr merge --auto --squash --delete-branch "${PR_URL}"
+        run: gh pr merge --auto --squash "${PR_URL}"
 ...
