@@ -1,4 +1,4 @@
-FROM hashicorp/terraform:1.11.3 as terraform
+FROM hashicorp/terraform:1.11.4 as terraform
 
 FROM mcr.microsoft.com/vscode/devcontainers/java:21-bullseye
 
