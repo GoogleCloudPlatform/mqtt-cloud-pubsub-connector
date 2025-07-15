@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ghcr.io/graalvm/jdk-community:23.0.2
+FROM ghcr.io/graalvm/jdk-community:24.0.2
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 
