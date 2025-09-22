@@ -18,4 +18,3 @@ kind: Kustomization
 
 resources:
   - "namespace.yaml"
-...

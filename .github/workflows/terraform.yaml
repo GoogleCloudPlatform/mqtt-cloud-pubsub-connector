@@ -15,7 +15,7 @@
 ---
 name: Terraform
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   push: null
   pull_request: null
 
@@ -26,6 +26,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
       - name: Terraform init
@@ -40,4 +42,3 @@ jobs:
         terraform-environments:
           - terraform
           - terraform-init
-...

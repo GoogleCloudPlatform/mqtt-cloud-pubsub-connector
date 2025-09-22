@@ -1,6 +1,0 @@
-{
-    "Exclude": [
-        "gradlew"
-    ],
-    "Verbose": true
-}

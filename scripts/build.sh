@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Copyright 2022 Google LLC
 #
@@ -90,13 +90,11 @@ while true; do
   esac
 done
 
+SUPER_LINTER_RUN_COMMAND=(docker run)
+SUPER_LINTER_RUN_COMMAND+=(--env-file "config/lint/super-linter.env")
+
 if ! is_ci; then
   echo "Running lint checks"
-
-  _DOCKER_INTERACTIVE_TTY_OPTION=
-  if [ -t 0 ]; then
-    _DOCKER_INTERACTIVE_TTY_OPTION="-it"
-  fi
 
   LINT_CI_JOB_PATH=".github/workflows/lint.yaml"
   DEFAULT_LINTER_CONTAINER_IMAGE_VERSION="$(grep <"${LINT_CI_JOB_PATH}" "super-linter/super-linter" | awk -F '@' '{print $2}' | head --lines=1)"
@@ -106,20 +104,27 @@ if ! is_ci; then
     docker pull "${LINTER_CONTAINER_IMAGE}"
   fi
 
-  # shellcheck disable=SC2086
-  docker run \
-    ${_DOCKER_INTERACTIVE_TTY_OPTION} \
-    --env ACTIONS_RUNNER_DEBUG="${ACTIONS_RUNNER_DEBUG:-"false"}" \
-    --env MULTI_STATUS="false" \
-    --env RUN_LOCAL="true" \
-    --env-file "config/lint/super-linter.env" \
-    --name "super-linter" \
-    --rm \
-    --volume "$(pwd)":/tmp/lint \
-    "${LINTER_CONTAINER_IMAGE}" \
-    "$@"
+  if [[ "${FIX_LINTING_ERRORS}" == "true" ]]; then
+    echo "Enable Super-linter fix mode"
+    SUPER_LINTER_RUN_COMMAND+=(--env-file "config/lint/super-linter-fix-mode.env")
+  fi
 
-  unset _DOCKER_INTERACTIVE_TTY_OPTION
+  # Override super-linter LOG_LEVEL if required. Useful for local debugging
+  if [[ -n "${SUPER_LINTER_LOG_LEVEL:-}" ]]; then
+    SUPER_LINTER_RUN_COMMAND+=(--env LOG_LEVEL="${SUPER_LINTER_LOG_LEVEL:-}")
+  fi
+
+  SUPER_LINTER_RUN_COMMAND+=(--name "super-linter")
+  SUPER_LINTER_RUN_COMMAND+=(--rm)
+  SUPER_LINTER_RUN_COMMAND+=(--tty)
+  SUPER_LINTER_RUN_COMMAND+=(--volume /etc/localtime:/etc/localtime:ro)
+  SUPER_LINTER_RUN_COMMAND+=(--env "MULTI_STATUS=true")
+  SUPER_LINTER_RUN_COMMAND+=(--env "RUN_LOCAL=true")
+  SUPER_LINTER_RUN_COMMAND+=(--env "SAVE_SUPER_LINTER_OUTPUT=true")
+  SUPER_LINTER_RUN_COMMAND+=(--volume "$(pwd)":/tmp/lint)
+  SUPER_LINTER_RUN_COMMAND+=("${LINTER_CONTAINER_IMAGE}")
+
+  "${SUPER_LINTER_RUN_COMMAND[@]}"
 else
   echo "Skipping lint checks because we assume it runs in a dedicated CI workflow."
 fi

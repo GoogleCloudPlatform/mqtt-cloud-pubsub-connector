@@ -10,20 +10,21 @@ This is not an official Google product.
 
 The MQTT <-> Cloud Pub/Sub connector works under the following assumptions:
 
-- It currently supports forwarding messages from MQTT topics to Cloud Pub/Sub topics. Support for the other way around
-    may come in a future release, depending on demand.
+- It currently supports forwarding messages from MQTT topics to Cloud Pub/Sub
+  topics. Support for the other way around may come in a future release,
+  depending on demand.
 - It doesn't map any MQTT semantics to Cloud Pub/Sub semantics, and vice versa.
-- It doesn't support any kind of message processing. If you need any processing, you need to implement
-    a message processing pipeline.
+- It doesn't support any kind of message processing. If you need any processing,
+  you need to implement a message processing pipeline.
 - It's not a MQTT broker.
-- It expects that you provisioned and configured the MQTT broker to connect to, and the necessary
-    Cloud Pub/Sub topics and subscriptions.
+- It expects that you provisioned and configured the MQTT broker to connect to,
+  and the necessary Cloud Pub/Sub topics and subscriptions.
 - It doesn't map MQTT client identities to Google Cloud identities.
 
 ## Design and architecture
 
-For more information about the design and the architecture of the MQTT <-> Cloud Pub/Sub connector, refer to
-the following documents:
+For more information about the design and the architecture of the MQTT <-> Cloud
+Pub/Sub connector, refer to the following documents:
 
 - [Overall design](docs/design.md)
 - [Development environment guide](docs/development-environment.md)
@@ -33,10 +34,11 @@ the following documents:
 
 ## Provision a test and validation runtime environment on Google Cloud
 
-For more information about provisioning and configuring a test and validation runtime environment
-on Google Cloud, see
+For more information about provisioning and configuring a test and validation
+runtime environment on Google Cloud, see
 [Provision a test and validation runtime environment on Google Cloud document](docs/provision-deploy-google-cloud-gke.md).
 
 ## Contribute to this project
 
-For more information about how to contribute to this project, refer to [CONTRIBUTING](CONTRIBUTING.md).
+For more information about how to contribute to this project, refer to
+[CONTRIBUTING](CONTRIBUTING.md).

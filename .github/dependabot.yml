@@ -27,6 +27,10 @@ updates:
     package-ecosystem: "gradle"
     schedule:
       interval: "daily"
+  - directory: "/"
+    package-ecosystem: "devcontainers"
+    schedule:
+      interval: "daily"
   - directory: "/.devcontainer"
     package-ecosystem: "docker"
     schedule:
@@ -47,4 +51,3 @@ updates:
     package-ecosystem: "terraform"
     schedule:
       interval: "daily"
-...
