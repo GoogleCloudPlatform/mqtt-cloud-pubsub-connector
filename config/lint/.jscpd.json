@@ -1,8 +1,6 @@
 {
   "threshold": 5,
-  "reporters": [
-    "consoleFull"
-  ],
+  "reporters": ["consoleFull"],
   "ignore": [
     "**/.terraform/**",
     "**/.venv*/**",

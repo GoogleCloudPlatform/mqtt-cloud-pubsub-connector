@@ -1,0 +1,8 @@
+---
+rules:
+  unpinned-uses:
+    ignore:
+      - build-container-images.yaml
+      - dependabot-automation.yaml
+      - lint.yaml
+      - terraform.yaml

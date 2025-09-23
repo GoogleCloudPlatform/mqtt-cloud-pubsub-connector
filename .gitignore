@@ -75,3 +75,6 @@ emqtt-bench/
 
 # Checkov external modules directory
 .external_modules/
+
+# Super-linter
+super-linter-output

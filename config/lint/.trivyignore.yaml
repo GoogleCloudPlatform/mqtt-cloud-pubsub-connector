@@ -1,0 +1,14 @@
+---
+misconfigurations:
+  - id: AVD-DS-0002
+    paths:
+      - "Dockerfile"
+      - ".devcontainer/Dockerfile"
+      - "container-images/gcloud-sdk/Dockerfile"
+  - id: AVD-DS-0026
+    paths:
+      - ".devcontainer/Dockerfile"
+      - "container-images/gcloud-sdk/Dockerfile"
+  - id: AVD-DS-0031
+    paths:
+      - ".devcontainer/Dockerfile"

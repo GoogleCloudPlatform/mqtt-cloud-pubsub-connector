@@ -10,4 +10,3 @@ output-baseline-as-skipped: true
 
 # Don't report passed checks in output
 quiet: true
-...

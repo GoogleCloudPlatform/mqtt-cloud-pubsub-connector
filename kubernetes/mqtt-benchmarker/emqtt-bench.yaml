@@ -33,17 +33,17 @@ spec:
           # Options reference: https://github.com/emqx/emqtt-bench
           args:
             - "pub"
-            - "--count"  # max number of clients that connect to the MQTT broker
+            - "--count" # max number of clients that connect to the MQTT broker
             - "1"
-            - "--host"  # MQTT broker host
+            - "--host" # MQTT broker host
             - "mosquitto"
-            - "--interval"  # Interval between connections to the broker
-            - "1"  # in milliseconds
+            - "--interval" # Interval between connections to the broker
+            - "1" # in milliseconds
             - "--interval_of_msg"
-            - "10"  # in milliseconds
+            - "10" # in milliseconds
             - "--qos"
-            - "2"  # 0 = at most once, 1 = at least once, 2 = exactly once
-            - "--topic"  # MQTT topic to publish to
+            - "2" # 0 = at most once, 1 = at least once, 2 = exactly once
+            - "--topic" # MQTT topic to publish to
             - "source-mqtt-topic"
           resources:
             # Setting limits same as requests because GKE Autopilot only considers requests
@@ -56,4 +56,3 @@ spec:
               cpu: "1000m"
               ephemeral-storage: "1Gi"
               memory: "1Gi"
-...

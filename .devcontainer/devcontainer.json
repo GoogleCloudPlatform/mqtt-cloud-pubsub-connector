@@ -1,32 +1,74 @@
 {
   "name": "Java",
   "build": {
-    "dockerfile": "Dockerfile",
-    "args": {
-      "INSTALL_MAVEN": "false",
-      "INSTALL_GRADLE": "true",
-      "NODE_VERSION": "none"
-    }
+    "dockerfile": "Dockerfile"
   },
   "customizations": {
     "vscode": {
-      "settings": {},
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
+        "editor.rulers": [80],
+        "editor.wordWrap": "off",
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "hadolint.cliOptions": ["--config", "./config/lint/.hadolint.yaml"],
+        "java.checkstyle.configuration": "https://raw.githubusercontent.com/checkstyle/checkstyle/master/src/main/resources/google_checks.xml",
+        "java.format.settings.profile": "GoogleStyle",
+        "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+        "java.jdt.ls.java.home": "/usr/lib/jvm/msopenjdk-current",
+        "java.import.gradle.java.home": "/usr/lib/jvm/msopenjdk-current",
+        "java.import.gradle.enabled": true,
+        "java.import.maven.enabled": false,
+        "markdownlint.config": {
+          "extends": "${workspaceFolder}/config/lint/.markdown-lint.yaml"
+        },
+        "prettier.resolveGlobalModules": true,
+        "redhat.telemetry.enabled": false,
+        "telemetry.telemetryLevel": "off",
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[markdown]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.wordWrap": "off"
+        },
+        "[shellscript]": {
+          "editor.defaultFormatter": "mkhl.shfmt"
+        },
+        "[terraform]": {
+          "editor.defaultFormatter": "hashicorp.terraform"
+        },
+        "[terraform-vars]": {
+          "editor.defaultFormatter": "hashicorp.terraform"
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
       "extensions": [
         "DavidAnson.vscode-markdownlint",
+        "docker.docker",
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "exiasr.hadolint",
         "HashiCorp.terraform",
-        "ms-azuretools.vscode-docker",
+        "mads-hartmann.bash-ide-vscode",
+        "mkhl.shfmt",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "redhat.apache-camel-extension-pack",
         "redhat.vscode-quarkus",
+        "timonwong.shellcheck",
         "vscjava.vscode-gradle",
         "vscjava.vscode-java-pack"
       ]
     }
   },
   "remoteUser": "vscode",
-  "runArgs": [
-    "--rm"
-  ],
+  "runArgs": ["--rm"],
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:1": {}
   }

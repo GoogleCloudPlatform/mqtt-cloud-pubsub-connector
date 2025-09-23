@@ -1,0 +1,18 @@
+---
+disable-telemetry: true
+exit-code: 1
+exit-on-eol: 2
+ignorefile: config/lint/.trivyignore.yaml
+scan:
+  scanners:
+    - vuln
+    - misconfig
+    - secret
+  skip-dirs:
+    - "**/super-linter-output"
+    - "**/.terraform"
+  skip-files:
+    - super-linter.log
+misconfiguration:
+  terraform:
+    exclude-downloaded-modules: true
