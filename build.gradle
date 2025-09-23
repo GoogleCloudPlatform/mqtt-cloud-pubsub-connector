@@ -46,8 +46,8 @@ dependencies {
   testImplementation 'org.testcontainers:testcontainers'
 }
 
-group 'com.google.cloud.solutions'
-version '1.0.0-SNAPSHOT'
+group = 'com.google.cloud.solutions'
+version = '1.0.0-SNAPSHOT'
 
 java {
   sourceCompatibility = JavaVersion.VERSION_21
