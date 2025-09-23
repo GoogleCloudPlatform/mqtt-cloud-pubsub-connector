@@ -14,7 +14,10 @@
 
 package com.google.cloud.solutions.profiles;
 
-import io.quarkus.test.junit.QuarkusTestProfile;
+import com.google.cloud.solutions.routes.MqttToCloudPubSubRoute;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class provides the base to implement a test profile to dynamically inject configuration
@@ -26,4 +29,31 @@ import io.quarkus.test.junit.QuarkusTestProfile;
  * <p>The configuration options added here are merged with the ones coming from other configuration
  * sources that Quarkus considers.
  */
-public abstract class AbstractTestProfile implements QuarkusTestProfile {}
+public abstract class AbstractMqttToCloudPubSubTest extends AbstractTestProfile {
+
+  public static final String MQTT_TOPICS_TO_PUBLISH_TO_PROPERTY_KEY =
+      "com.google.cloud.solutions.mqtt-client.mqtt-topics-to-publish-to";
+
+  /**
+   * Get the MQTT topic name to subscribe to.
+   *
+   * @return the MQTT topic name to subscribe to
+   */
+  abstract String getMqttTopicName();
+
+  /**
+   * Get the comma-separated MQTT topic list to publish messages to.
+   *
+   * @return the MQTT topic name to subscribe to
+   */
+  abstract String getMqttTopicsToPublishTo();
+
+  @Override
+  public Map<String, String> getConfigOverrides() {
+    Map<String, String> properties = new HashMap<>();
+    properties.put(MqttToCloudPubSubRoute.MQTT_TOPIC_PROPERTY_KEY, getMqttTopicName());
+    properties.put(MQTT_TOPICS_TO_PUBLISH_TO_PROPERTY_KEY, getMqttTopicsToPublishTo());
+
+    return Collections.unmodifiableMap(properties);
+  }
+}

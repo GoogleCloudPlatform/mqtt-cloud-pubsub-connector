@@ -16,7 +16,7 @@ package com.google.cloud.solutions.routes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.google.cloud.solutions.profiles.AbstractTestProfile;
+import com.google.cloud.solutions.profiles.AbstractMqttToCloudPubSubTest;
 import com.google.cloud.solutions.resources.CloudPubSubResource;
 import com.google.cloud.solutions.resources.InjectCloudPubSubContainer;
 import com.google.cloud.solutions.resources.InjectMqttBrokerContainer;
@@ -65,7 +65,7 @@ public abstract class AbstractMqttToCloudPubSubMessageExchangeTest {
   @Inject
   String mqttTopic;
 
-  @ConfigProperty(name = AbstractTestProfile.MQTT_TOPICS_TO_PUBLISH_TO_PROPERTY_KEY)
+  @ConfigProperty(name = AbstractMqttToCloudPubSubTest.MQTT_TOPICS_TO_PUBLISH_TO_PROPERTY_KEY)
   @Inject
   String mqttTopicsToPublishTo;
 

@@ -18,7 +18,7 @@ package com.google.cloud.solutions.profiles;
  * This class provides the configuration values to run a test that maps the topics matched by a one
  * level wildcard MQTT subscription (+) with a Cloud Pub/Sub topic.
  */
-public class OneLevelWildcardMqttSubscriptionProfile extends AbstractTestProfile {
+public class OneLevelWildcardMqttSubscriptionProfile extends AbstractMqttToCloudPubSubTest {
 
   private static final String MQTT_TOPIC_ROOT_NAME = "one-level-wildcard-test-topic";
   private static final String MQTT_SUB_SUB_TOPIC_NAME = "test-sub-sub-topic";

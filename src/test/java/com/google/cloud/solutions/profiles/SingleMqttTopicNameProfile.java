@@ -18,7 +18,7 @@ package com.google.cloud.solutions.profiles;
  * This class provides the configuration values to run a test that maps a single MQTT with a Cloud
  * Pub/Sub topic.
  */
-public class SingleMqttTopicNameProfile extends AbstractTestProfile {
+public class SingleMqttTopicNameProfile extends AbstractMqttToCloudPubSubTest {
 
   @Override
   public String getConfigProfile() {
