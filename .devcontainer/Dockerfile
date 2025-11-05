@@ -1,6 +1,6 @@
 FROM hadolint/hadolint:v2.14.0-alpine AS dockerfile-lint
 FROM mvdan/shfmt:v3.12.0 AS shfmt
-FROM hashicorp/terraform:1.13.4 AS terraform
+FROM hashicorp/terraform:1.13.5 AS terraform
 
 FROM mcr.microsoft.com/vscode/devcontainers/java:21-bullseye
 
