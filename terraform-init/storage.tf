@@ -15,7 +15,7 @@
 # https://registry.terraform.io/modules/terraform-google-modules/cloud-storage/google
 module "terraform_backend_gcs_buckets" {
   source  = "terraform-google-modules/cloud-storage/google"
-  version = "12.0.0"
+  version = "12.1.0"
 
   location                 = var.terraform_state_production_bucket_location
   names                    = [var.terraform_state_production_bucket_name]
