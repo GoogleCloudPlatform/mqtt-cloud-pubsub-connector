@@ -38,7 +38,7 @@ jobs:
       - name: Load super-linter configuration
         run: cat config/lint/super-linter.env >> "$GITHUB_ENV"
       - name: super-linter
-        uses: super-linter/super-linter@v8.1.0
+        uses: super-linter/super-linter@v8.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -67,7 +67,7 @@ jobs:
       - name: Load super-linter fix mode configuration
         run: cat config/lint/super-linter-fix-mode.env >> "$GITHUB_ENV"
       - name: Super-Linter
-        uses: super-linter/super-linter@v8.1.0
+        uses: super-linter/super-linter@v8.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit and push linting fixes
