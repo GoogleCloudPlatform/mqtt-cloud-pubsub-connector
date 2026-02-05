@@ -25,7 +25,7 @@ locals {
 # https://registry.terraform.io/modules/terraform-google-modules/network/google/latest
 module "gcp_network" {
   source  = "terraform-google-modules/network/google"
-  version = "15.0.0"
+  version = "15.1.0"
 
   project_id   = data.google_project.default_project.project_id
   network_name = local.network_name
