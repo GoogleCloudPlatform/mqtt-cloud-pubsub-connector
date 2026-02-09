@@ -30,6 +30,8 @@ repositories {
 dependencies {
   implementation enforcedPlatform("io.quarkus.platform:quarkus-camel-bom:${ioQuarkusVersion}")
   implementation enforcedPlatform("io.quarkus.platform:quarkus-bom:${ioQuarkusVersion}")
+  implementation platform("org.testcontainers:testcontainers-bom:${orgTestcontainersVersion}")
+
 
   implementation 'io.quarkus:quarkus-arc'
   implementation 'io.quarkus:quarkus-container-image-docker'
@@ -42,7 +44,7 @@ dependencies {
   testImplementation 'io.quarkus:quarkus-junit5'
   testImplementation 'io.rest-assured:rest-assured'
   testImplementation "org.assertj:assertj-core:${assertjVersion}"
-  testImplementation 'org.testcontainers:junit-jupiter'
+  testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
   testImplementation 'org.testcontainers:testcontainers'
 }
 

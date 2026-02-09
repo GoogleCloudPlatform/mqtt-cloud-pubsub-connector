@@ -46,6 +46,7 @@ jobs:
           || steps.metadata.outputs.dependency-names == 'io.quarkus.platform:quarkus-bom'
           || steps.metadata.outputs.dependency-names == 'io.quarkus'
           || steps.metadata.outputs.dependency-names == 'io.quarkus.platform:quarkus-camel-bom, io.quarkus.platform:quarkus-bom, io.quarkus'
+          || steps.metadata.outputs.dependency-names == 'org.testcontainers:testcontainers-bom'
           || steps.metadata.outputs.dependency-names == 'numpy'
           || steps.metadata.outputs.dependency-names == 'org.assertj:assertj-core'
           || steps.metadata.outputs.dependency-names == 'super-linter/super-linter'
