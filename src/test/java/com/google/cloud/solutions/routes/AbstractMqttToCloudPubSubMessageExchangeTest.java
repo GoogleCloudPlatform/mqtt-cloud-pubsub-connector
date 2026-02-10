@@ -254,7 +254,7 @@ public abstract class AbstractMqttToCloudPubSubMessageExchangeTest {
     // Stop the consumer template because we don't need to receive any new messages
     consumerTemplate.stop();
 
-    // Check that the test MQTT clinet disconnected
+    // Check that the test MQTT client disconnected
     assertMqttClientDisconnected(mqttBrokerContainer.getLogs(), testMqttClientId);
 
     // Check that the Apache Camel route connected to the MQTT broker, and
