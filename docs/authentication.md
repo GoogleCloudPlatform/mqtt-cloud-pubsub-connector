@@ -20,7 +20,7 @@ necessary configuration properties as described
 
 ### SSL/TLS certificates to secure the connection
 
-The **MQTT <-> Cloud Pub/Sub Connector** supports securing a comminication
+The **MQTT <-> Cloud Pub/Sub Connector** supports securing a communication
 channel using a SSL/TLS certificate. For more information about how to provide a
 certificate and configure the **MQTT <-> Cloud Pub/Sub Connector** to use that
 certificate to secure the connection to the MQTT broker, refer to the

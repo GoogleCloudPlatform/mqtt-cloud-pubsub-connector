@@ -26,7 +26,7 @@ WORKDIR /usr/src/app
 
 USER "${USER_UID}"
 
-# # We make four distinct layers so if there are application changes the library layers can be re-used
+# # We make four distinct layers so if there are application changes the library layers can be reused
 COPY --chown="${USER_UID}" build/quarkus-app/lib/ "${APP_DIRECTORY}/lib/"
 COPY --chown="${USER_UID}" build/quarkus-app/*.jar "${APP_DIRECTORY}/"
 COPY --chown="${USER_UID}" build/quarkus-app/app/ "${APP_DIRECTORY}/app/"
