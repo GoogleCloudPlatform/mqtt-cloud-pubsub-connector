@@ -29,7 +29,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v4
       - name: Terraform init
         working-directory: ${{ matrix.terraform-environments }}
         # Don't initialize the backend because we may not have any remote backend configuration available
