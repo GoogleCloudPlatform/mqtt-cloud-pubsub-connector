@@ -14,7 +14,7 @@
 
 module "pubsub" {
   source  = "terraform-google-modules/pubsub/google"
-  version = "8.6.0"
+  version = "8.7.0"
 
   topic      = var.cloud_pubsub_destination_topic_name
   project_id = data.google_project.default_project.project_id
