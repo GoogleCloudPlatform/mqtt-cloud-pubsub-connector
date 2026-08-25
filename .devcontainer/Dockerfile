@@ -1,4 +1,4 @@
-FROM hadolint/hadolint:v2.14.0-alpine AS dockerfile-lint
+FROM hadolint/hadolint:v2.15.1-alpine AS dockerfile-lint
 FROM mvdan/shfmt:v3.13.1 AS shfmt
 FROM hashicorp/terraform:1.15.9 AS terraform
 
