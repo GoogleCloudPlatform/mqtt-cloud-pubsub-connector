@@ -139,8 +139,9 @@ public abstract class AbstractContainerResource implements QuarkusTestResourceLi
     org.slf4j.Logger slf4jLogger = LoggerFactory.getLogger(AbstractContainerResource.class);
     // Add a log consumer to the Testcontainers container as to have the logs from
     // the MQTT container output to the test logger.
-    final Slf4jLogConsumer containerLogConsumer =
-        new Slf4jLogConsumer(slf4jLogger).withSeparateOutputStreams();
+    // Keep both streams at INFO because some container images write INFO logs
+    // to stderr.
+    final Slf4jLogConsumer containerLogConsumer = new Slf4jLogConsumer(slf4jLogger);
     container.followOutput(containerLogConsumer);
 
     // This may not be localhost, so we need to get it from the container runtime
